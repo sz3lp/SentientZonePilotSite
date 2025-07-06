@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentientZone: Reclaim Control - Pilot Landing Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light Blue-Gray Background */
+            color: #3d3d3d;
+        }
+        .bg-primary { background-color: #0044cc; }
+        .text-primary { color: #0044cc; }
+        .bg-secondary { background-color: #00aaff; }
+        .text-secondary { color: #00aaff; }
+        .bg-accent { background-color: #ffc400; }
+        .text-accent { color: #ffc400; }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 2rem;
+        }
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: #4a5568;
+            max-width: 600px;
+            margin: 1rem auto 0 auto;
+        }
+        .override-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+        .override-arrow {
+            font-size: 2rem;
+            color: #a0aec0;
+            margin: 0.5rem 0;
+        }
+        .table-header {
+            background-color: #e2e8f0;
+            color: #3d3d3d;
+            font-weight: 600;
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #cbd5e0;
+        }
+        .table-row {
+            background-color: white;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .table-cell {
+            padding: 1rem;
+            text-align: left;
+        }
+        .accordion-button {
+            background-color: #fff;
+            border: 1px solid #e2e8f0;
+            width: 100%;
+            text-align: left;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+        .accordion-button:hover {
+            background-color: #edf2f7;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+            background-color: #fff;
+            border-radius: 0 0 0.75rem 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-top: none;
+        }
+        .accordion-content.show {
+            max-height: 1000px; /* Sufficiently large to show content */
+        }
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-width: 600px; /* Increased max-width for form */
+            width: 90%;
+            text-align: center;
+            position: relative;
+            max-height: 90vh; /* Ensure it fits on smaller screens */
+            overflow-y: auto; /* Enable scrolling for content overflow */
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #a0aec0;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #3d3d3d;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="number"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 0.5rem;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+            transition: border-color 0.2s;
+        }
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="number"]:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #0044cc;
+            box-shadow: 0 0 0 3px rgba(0, 68, 204, 0.2);
+        }
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .form-radio-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .form-radio-option input {
+            margin-right: 0.5rem;
+        }
+        .message-box {
+            background-color: #e0f2fe; /* Light blue for info */
+            color: #0044cc;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: none; /* Hidden by default */
+        }
+        .message-box.error {
+            background-color: #fee2e2; /* Light red for error */
+            color: #dc2626;
+        }
+        .message-box.success {
+            background-color: #dcfce7; /* Light green for success */
+            color: #16a34a;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1899574337508255');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1899574337508255&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Hero Section -->
+    <div class="bg-primary text-white py-20 px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">Your HVAC System Is Lying to You.</h1>
+            <p class="text-lg md:text-2xl text-blue-200 mb-8">Wasting energy. Ignoring people. Masking the problem with fake control.</p>
+            <a href="#fracture" class="inline-block bg-accent text-primary font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
+                See How Sentient Control Works
+            </a>
+        </div>
+    </div>
+
+    <!-- The Fracture Section -->
+    <div id="fracture" class="py-20 bg-white">
+        <section class="max-w-5xl mx-auto px-4 text-center">
+            <h2 class="section-title text-primary">What You Already Know Is Broken</h2>
+            <p class="section-subtitle">That nagging feeling? It's real. Traditional HVAC systems are designed to fail you, your occupants, and your budget.</p>
+
+            <div class="mt-12 flex flex-col md:flex-row justify-center items-center gap-6">
+                <div class="override-step">
+                    <p class="text-5xl">😠</p>
+                    <p class="font-semibold mt-2">1. Discomfort & Complaints</p>
+                    <p class="text-gray-600 text-sm">Someone is always too hot or too cold.</p>
+                </div>
+                <span class="override-arrow hidden md:block">→</span>
+                <div class="override-step">
+                    <p class="text-5xl">👆</p>
+                    <p class="font-semibold mt-2">2. Manual Overrides</p>
+                    <p class="text-gray-600 text-sm">Occupants "fix" it by taping vents or constant thermostat adjustments.</p>
+                </div>
+                <span class="override-arrow hidden md:block">→</span>
+                <div class="override-step">
+                    <p class="text-5xl">📈</p>
+                    <p class="font-semibold mt-2">3. Energy Waste & Strain</p>
+                    <p class="text-gray-600 text-sm">HVAC overreacts, cycles inefficiently, and wears out faster.</p>
+                </div>
+                <span class="override-arrow hidden md:block">→</span>
+                <div class="override-step">
+                    <p class="text-5xl">💸</p>
+                    <p class="font-semibold mt-2">4. Higher Bills & Distrust</p>
+                    <p class="text-gray-600 text-sm">Your budget suffers, and people lose faith in the system.</p>
+                </div>
+            </div>
+
+            <div class="mt-12 grid md:grid-cols-2 gap-8 text-left max-w-4xl mx-auto">
+                <div>
+                    <h3 class="font-bold text-xl mb-3 text-primary">The Hidden Costs:</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start"><span class="text-secondary mr-2 mt-1">✓</span> "Do Not Touch" signs = thermostat surrender.</li>
+                        <li class="flex items-start"><span class="text-secondary mr-2 mt-1">✓</span> BMS overload: 30 alarms/day, 0 action.</li>
+                        <li class="flex items-start"><span class="text-secondary mr-2 mt-1">✓</span> 25% of electricity is spent on empty rooms.</li>
+                        <li class="flex items-start"><span class="text-secondary mr-2 mt-1">✓</span> Thermostat tug-of-war isn’t just annoying — it’s expensive.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-xl mb-3 text-primary">The Psychological Toll:</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start"><span class="text-secondary mr-2 mt-1">✓</span> Elevated stress from discomfort, impacting focus.</li>
+                        <li class="flex items-start"><span class="text-secondary mr-2 mt-1">✓</span> Lack of agency leads to frustration and ad-hoc "fixes."</li>
+                        <li class="flex items-start"><span class="text-secondary mr-2 mt-1">✓</span> Reduced productivity and increased absenteeism.</li>
+                        <li class="flex items-start"><span class="text-secondary mr-2 mt-1">✓</span> Erosion of trust in building management.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Proof Section -->
+    <div class="py-20 bg-gray-100">
+        <section class="max-w-5xl mx-auto px-4 text-center">
+            <h2 class="section-title text-primary">Comfort that Listens. Energy that Obeys. Systems that Learn.</h2>
+            <p class="section-subtitle">SentientZone isn't just "smart." It's an inevitable evolution, designed to solve the deep-rooted problems traditional HVAC creates.</p>
+
+            <div class="mt-12 overflow-x-auto">
+                <table class="min-w-full bg-white rounded-lg shadow-lg">
+                    <thead>
+                        <tr>
+                            <th class="table-header rounded-tl-lg">Problem</th>
+                            <th class="table-header">Old System</th>
+                            <th class="table-header rounded-tr-lg">SentientZone Fix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row">
+                            <td class="table-cell font-semibold">Static Setpoints</td>
+                            <td class="table-cell">35% energy waste in unoccupied spaces.</td>
+                            <td class="table-cell text-primary font-medium">Adaptive zoning, edge decisioning for precise control.</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell font-semibold">Sensor Drift</td>
+                            <td class="table-cell">Missed comfort targets, unnecessary heating/cooling.</td>
+                            <td class="table-cell text-primary font-medium">Self-calibrating mesh sensor network ensures accuracy.</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell font-semibold">Override Chaos</td>
+                            <td class="table-cell">Constant manual adjustments, trust collapse.</td>
+                            <td class="table-cell text-primary font-medium">Per-user feedback with real logic, reducing need for overrides.</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell font-semibold rounded-bl-lg">Centralized Control</td>
+                            <td class="table-cell">One-size-fits-none, widespread discomfort.</td>
+                            <td class="table-cell text-primary font-medium rounded-br-lg">Decentralized ambient sovereignty for individual comfort.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- ROI Calculator Module -->
+    <div class="py-20 bg-white">
+        <section class="max-w-5xl mx-auto px-4 text-center">
+            <h2 class="section-title text-primary">What You Could Save in 30 Days</h2>
+            <p class="section-subtitle">Enter your average monthly energy bill to see your estimated annual savings and payback period with SentientZone.</p>
+
+            <div class="mt-12 card max-w-2xl mx-auto p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="text-left">
+                        <label for="monthlyBill" class="block text-gray-700 text-sm font-bold mb-2">Avg. Monthly Energy Bill ($)</label>
+                        <input type="number" id="monthlyBill" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="e.g., 2500">
+                    </div>
+                    <div class="text-left">
+                        <label for="buildingSqFt" class="block text-gray-700 text-sm font-bold mb-2">Building Size (Sq Ft)</label>
+                        <input type="number" id="buildingSqFt" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="e.g., 10000">
+                    </div>
+                </div>
+                <button id="calculateRoiBtn" class="bg-primary text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition-colors duration-300 shadow-lg">
+                    Calculate My Savings
+                </button>
+                <div class="mt-8 text-center">
+                    <p class="text-gray-600 text-lg">Estimated Annual Savings: <span id="estimatedSavings" class="font-bold text-primary">$0</span></p>
+                    <p class="text-gray-600 text-lg">Projected Payback Period: <span id="paybackPeriod" class="font-bold text-primary">0 Years</span></p>
+                    <p class="text-sm text-gray-500 mt-2">Based on typical commercial building data and an estimated pilot cost of $6,000. Individual results may vary.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Social Proof Module -->
+    <div class="py-20 bg-gray-100">
+        <section class="max-w-5xl mx-auto px-4 text-center">
+            <h2 class="section-title text-primary">What Our Pilot Sites Are Saying</h2>
+            <p class="section-subtitle">Real results from real buildings. See how SentientZone is making a difference.</p>
+
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-6 text-left">
+                    <p class="text-xl italic text-gray-700 mb-4">"Our comfort complaints dropped 90% within the first month. People finally stopped taping the vents!"</p>
+                    <p class="font-semibold text-primary">- Operations Head, Coworking Space</p>
+                </div>
+                <div class="card p-6 text-left">
+                    <p class="text-xl italic text-gray-700 mb-4">"The energy savings were immediate and significant. SentientZone paid for itself faster than we expected."</p>
+                    <p class="font-semibold text-primary">- Facilities Manager, Indie School</p>
+                </div>
+                <div class="card p-6 text-left">
+                    <p class="text-xl italic text-gray-700 mb-4">"We've gained incredible insight into how our building actually uses energy. It's truly transformative."</p>
+                    <p class="font-semibold text-primary">- Founder, Creative Agency</p>
+                </div>
+                <div class="card p-6 text-left">
+                    <p class="text-xl italic text-gray-700 mb-4">"The team feels more in control and happier. It's amazing what a difference personalized comfort makes."</p>
+                    <p class="font-semibold text-primary">- Studio Manager, Wellness Center</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Trust Bar Above CTA -->
+    <div class="bg-secondary text-white py-4 px-4 text-center">
+        <div class="max-w-5xl mx-auto text-lg font-semibold flex flex-wrap justify-center items-center gap-x-6 gap-y-2">
+            <span>✅ ASHRAE 55</span>
+            <span>•</span>
+            <span>✅ No Disruption</span>
+            <span>•</span>
+            <span>✅ ~380% ROI</span>
+        </div>
+    </div>
+
+    <!-- Call to Action — Pilot Framing -->
+    <div class="py-20 bg-primary text-white text-center">
+        <section class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Be the Facility That Gets It Right First.</h2>
+            <p class="text-lg md:text-xl text-blue-200 mb-2">Only <span class="font-extrabold text-accent">7</span> pilot sites remain in this cycle.</p>
+            <p class="text-lg md:text-xl text-blue-200 mb-8">You don’t need to replace anything. Just reclaim control.</p>
+            <button id="applyPilotBtn" class="inline-block bg-accent text-primary font-bold py-4 px-10 rounded-full text-xl hover:bg-yellow-400 transition-colors duration-300 shadow-lg mr-4">
+                Apply for a Pilot
+            </button>
+            <button id="qualifyBtn" class="inline-block border-2 border-white text-white font-bold py-4 px-10 rounded-full text-xl hover:bg-white hover:text-primary transition-colors duration-300 shadow-lg">
+                See If You Qualify
+            </button>
+        </section>
+    </div>
+
+    <!-- Optional Deep Dive – The Human Cost -->
+    <div class="py-20 bg-gray-100">
+        <section class="max-w-5xl mx-auto px-4 text-center">
+            <h2 class="section-title text-primary">Optional Deep Dive: The Human Element of HVAC</h2>
+            <p class="section-subtitle">For those who need to understand the full picture: how traditional systems impact human psychology and why true control is transformative.</p>
+
+            <div class="mt-12 max-w-3xl mx-auto">
+                <button id="deepDiveToggle" class="accordion-button">
+                    <span>Click to Explore the Psychological Impact</span>
+                    <span class="accordion-icon text-2xl transform rotate-0 transition-transform duration-300">▼</span>
+                </button>
+                <div id="deepDiveContent" class="accordion-content">
+                    <div class="p-6 text-left text-gray-700">
+                        <p class="mb-4"><strong>Why trust collapsed:</strong> When occupants feel ignored by their environment, trust in the building management erodes. This isn't just about temperature; it's about perceived agency and respect. The "one-size-fits-all" approach of centralized HVAC actively fosters distrust.</p>
+                        <p class="mb-4"><strong>What cortisol and override behavior tell you:</strong> Uncomfortable temperatures elevate stress hormones like cortisol, impairing focus and emotional regulation. Frequent manual overrides are a direct symptom of this psychological distress, leading to a vicious cycle where attempts to gain control inadvertently increase energy waste and system wear.</p>
+                        <p class="mb-4"><strong>Why adaptive comfort theory changed the codes:</strong> Research shows people tolerate a wider range of temperatures when they have control. This "adaptive comfort" principle is now recognized in standards like ASHRARE 55. Empowering occupants with control not only boosts comfort but also allows for broader temperature setpoints, leading to significant energy savings without sacrificing well-being. SentientZone leverages this by giving control back to the individual, aligning human psychology with energy efficiency goals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>&copy; 2025 SentientZone. All rights reserved.</p>
+            <div class="mt-4 text-sm font-semibold text-gray-600 flex flex-wrap justify-center gap-x-4 gap-y-2">
+                <span>ASHRAE 55 Compliant</span>
+                <span>•</span>
+                <span>Title 24 Ready</span>
+                <span>•</span>
+                <span>OpenADR Compatible</span>
+                <span>•</span>
+                <span>AI Override Logic Transparent</span>
+                <span>•</span>
+                <span>BACnet Integration Certified</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Pilot Interest Form Modal -->
+    <div id="pilotInterestModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-button" onclick="closePilotModal()">×</button>
+            <h3 class="text-2xl font-bold text-primary mb-4">Apply for a SentientZone Pilot</h3>
+            <p class="text-gray-700 mb-6">Tell us a bit about your building and your needs. We'll get back to you within 1-2 business days.</p>
+            
+            <form id="pilotApplicationForm" action="https://getform.io/f/byvyddxa" method="POST" class="text-left">
+                <input type="hidden" name="_gotcha" style="display:none !important">
+                <input type="hidden" name="source_page" value="pilot_page">
+                <input type="hidden" name="quiz_risk_level" id="quizRiskLevelHidden">
+                <input type="hidden" name="quiz_monthly_bill" id="quizMonthlyBillHidden">
+
+                <div class="form-group">
+                    <label for="fullName">Your Full Name <span class="text-red-500">*</span></label>
+                    <input type="text" id="fullName" name="full_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="workEmail">Work Email <span class="text-red-500">*</span></label>
+                    <input type="email" id="workEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="yourRole">Your Role <span class="text-red-500">*</span></label>
+                    <input type="text" id="yourRole" name="role" placeholder="e.g., Facilities Manager, Operations Head" required>
+                </div>
+                <div class="form-group">
+                    <label for="buildingType">Building Type <span class="text-red-500">*</span></label>
+                    <select id="buildingType" name="building_type" class="w-full" required>
+                        <option value="">Select your building type</option>
+                        <option value="office">Office Building</option>
+                        <option value="school">School/University</option>
+                        <option value="gym">Gym/Fitness Center</option>
+                        <option value="retail">Retail Store/Mall</option>
+                        <option value="hospitality">Hotel/Hospitality</option>
+                        <option value="other">Other Commercial</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="buildingSqFtForm">Building Size (Sq Ft)</label>
+                    <input type="number" id="buildingSqFtForm" name="building_sq_ft" placeholder="e.g., 10000">
+                </div>
+                <div class="form-group">
+                    <label for="hvacSetup">Briefly describe your current HVAC setup</label>
+                    <textarea id="hvacSetup" name="hvac_setup" placeholder="e.g., Centralized VAV system, multiple packaged units"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="currentIssues">What are your biggest HVAC challenges or pain points? (e.g., complaints, high bills, overrides)</label>
+                    <textarea id="currentIssues" name="current_issues" placeholder="e.g., Constant hot/cold complaints, high energy bills in empty areas"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Do you have decision-making authority for this pilot? <span class="text-red-500">*</span></label>
+                    <div class="flex space-x-4 mt-2">
+                        <label class="form-radio-option">
+                            <input type="radio" name="decision_authority" value="yes" required> Yes
+                        </label>
+                        <label class="form-radio-option">
+                            <input type="radio" name="decision_authority" value="no"> No
+                        </label>
+                    </div>
+                    <p id="decisionAuthorityNote" class="text-sm text-gray-600 mt-2 hidden">If 'No', please ensure a decision-maker is available for follow-up discussions.</p>
+                </div>
+                <div class="form-group">
+                    <label for="pilotWorthIt">What would make this pilot a success for you?</label>
+                    <textarea id="pilotWorthIt" name="pilot_success_criteria" placeholder="e.g., 20% energy savings, 50% reduction in complaints"></textarea>
+                </div>
+
+                <div id="formMessage" class="message-box hidden"></div>
+
+                <button type="submit" class="w-full bg-primary text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg mt-6">
+                    Submit Pilot Application
+                </button>
+            </form>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Event: ROI Calculation Engagement
+    document.getElementById('calculateRoiBtn')?.addEventListener('click', function () {
+      fbq('track', 'ViewContent', {
+        content_name: 'ROI Calculator',
+        content_category: 'HVAC Savings',
+        value: 0,
+        currency: 'USD'
+      });
+    });
+
+    // Event: Pilot Application Intent (Button Clicks)
+    document.getElementById('applyPilotBtn')?.addEventListener('click', function () {
+      fbq('track', 'InitiateCheckout', {
+        content_name: 'Pilot Program',
+        content_category: 'SentientZone Funnel'
+      });
+    });
+
+    document.getElementById('qualifyBtn')?.addEventListener('click', function () {
+      fbq('track', 'InitiateCheckout', {
+        content_name: 'Qualification Check',
+        content_category: 'SentientZone Funnel'
+      });
+    });
+
+    // Event: Form Submission (Lead)
+    document.getElementById('pilotApplicationForm')?.addEventListener('submit', function () {
+      fbq('track', 'Lead', {
+        content_name: 'Pilot Application',
+        content_category: 'SentientZone Funnel'
+      });
+    });
+
+    const deepDiveToggle = document.getElementById('deepDiveToggle');
+    const deepDiveContent = document.getElementById('deepDiveContent');
+    const deepDiveIcon = deepDiveToggle.querySelector('.accordion-icon');
+
+    deepDiveToggle.addEventListener('click', function() {
+        deepDiveContent.classList.toggle('show');
+        if (deepDiveContent.classList.contains('show')) {
+            deepDiveIcon.classList.add('rotate-180');
+        } else {
+            deepDiveIcon.classList.remove('rotate-180');
+        }
+    });
+
+    // Smooth scrolling for CTA buttons, if they link to sections
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // ROI Calculator Logic (existing, enhanced with prefill)
+    const calculateRoiBtn = document.getElementById('calculateRoiBtn');
+    const monthlyBillInput = document.getElementById('monthlyBill');
+    const buildingSqFtInput = document.getElementById('buildingSqFt');
+    const estimatedSavingsSpan = document.getElementById('estimatedSavings');
+    const paybackPeriodSpan = document.getElementById('paybackPeriod');
+
+    calculateRoiBtn.addEventListener('click', function() {
+        const monthlyBill = parseFloat(monthlyBillInput.value);
+
+        if (isNaN(monthlyBill) || monthlyBill <= 0) {
+            estimatedSavingsSpan.textContent = '$0';
+            paybackPeriodSpan.textContent = '0 Years';
+            return;
+        }
+
+        const annualTotalBill = monthlyBill * 12;
+        const annualHVACCost = annualTotalBill * 0.40; // Assuming 40% of bill is HVAC
+        const annualSavings = annualHVACCost * 0.30; // Assuming 30% savings on HVAC
+
+        const estimatedPilotCost = 6000; // Average estimated pilot cost for calculation
+
+        const paybackPeriod = annualSavings > 0 ? (estimatedPilotCost / annualSavings).toFixed(1) : 'N/A';
+
+        estimatedSavingsSpan.textContent = `$${annualSavings.toFixed(0)}`;
+        paybackPeriodSpan.textContent = `${paybackPeriod} Years`;
+    });
+
+    // Pilot Interest Form Modal Logic
+    const pilotInterestModal = document.getElementById('pilotInterestModal');
+    const applyPilotBtn = document.getElementById('applyPilotBtn');
+    const qualifyBtn = document.getElementById('qualifyBtn');
+    const pilotApplicationForm = document.getElementById('pilotApplicationForm');
+    const formMessage = document.getElementById('formMessage');
+    const decisionAuthorityRadios = document.querySelectorAll('input[name="decision_authority"]');
+    const decisionAuthorityNote = document.getElementById('decisionAuthorityNote');
+
+    // Hidden fields for prefilling from quiz
+    const quizRiskLevelHidden = document.getElementById('quizRiskLevelHidden');
+    const quizMonthlyBillHidden = document.getElementById('quizMonthlyBillHidden');
+
+    let hasModalBeenOpened = false; // Flag to track if the modal has been opened
+
+    function openPilotModal() {
+        if (pilotInterestModal.classList.contains('show')) {
+            return; // Prevent opening if already open
+        }
+        pilotInterestModal.classList.add('show');
+        hasModalBeenOpened = true; // Set flag to true
+
+        // Prefill from URL params first
+        const urlParams = new URLSearchParams(window.location.search);
+        let monthlyBillFromSource = urlParams.get('bill');
+        let riskLevelFromSource = urlParams.get('risk');
+
+        // Fallback to Session Storage if no URL params
+        if (!monthlyBillFromSource) {
+            monthlyBillFromSource = sessionStorage.getItem('quiz_bill');
+        }
+        if (!riskLevelFromSource) {
+            riskLevelFromSource = sessionStorage.getItem('quiz_risk');
+        }
+
+        if (monthlyBillFromSource && !isNaN(monthlyBillFromSource)) {
+            document.getElementById('buildingSqFtForm').value = ''; // Clear if not directly mapped, or prefill with a calculated value
+            document.getElementById('currentIssues').value = `High energy bills (approx. $${monthlyBillFromSource}/month)`;
+            quizMonthlyBillHidden.value = monthlyBillFromSource;
+        }
+        if (riskLevelFromSource) {
+            quizRiskLevelHidden.value = riskLevelFromSource;
+            // You could also dynamically add text to the form based on risk if desired
+        }
+    }
+
+    window.closePilotModal = function() {
+        pilotInterestModal.classList.remove('show');
+        pilotApplicationForm.reset(); // Reset form on close
+        formMessage.style.display = 'none'; // Hide messages
+        formMessage.classList.remove('error', 'success');
+        decisionAuthorityNote.classList.add('hidden'); // Hide note
+    };
+
+    applyPilotBtn.addEventListener('click', openPilotModal);
+    qualifyBtn.addEventListener('click', openPilotModal);
+
+    // Close modal if clicked outside content
+    pilotInterestModal.addEventListener('click', function(event) {
+        if (event.target === pilotInterestModal) {
+            closePilotModal();
+        }
+    });
+
+    // Conditional display for Decision Authority Note
+    decisionAuthorityRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.value === 'no') {
+                decisionAuthorityNote.classList.remove('hidden');
+            } else {
+                decisionAuthorityNote.classList.add('hidden');
+            }
+        });
+    });
+
+    // Pilot Application Form Submission (using Getform)
+    pilotApplicationForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        formMessage.style.display = 'none'; // Hide previous messages
+        formMessage.classList.remove('error', 'success');
+
+        const submitButton = this.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+
+        try {
+            const formData = new FormData(this);
+            
+            const response = await fetch(this.action, {
+                method: this.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json' 
+                }
+            });
+
+            if (response.ok) {
+                formMessage.textContent = "Application submitted successfully! We'll be in touch shortly.";
+                formMessage.classList.add('success');
+                formMessage.style.display = 'block';
+                pilotApplicationForm.reset(); // Clear form fields
+                decisionAuthorityNote.classList.add('hidden'); // Hide note
+                setTimeout(closePilotModal, 3000); // Close modal after 3 seconds
+            } else {
+                formMessage.textContent = "Failed to submit application. Please try again.";
+                formMessage.classList.add('error');
+                formMessage.style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Error submitting pilot form:', error);
+            formMessage.textContent = "An error occurred. Please try again.";
+            formMessage.classList.add('error');
+            formMessage.style.display = 'block';
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit Pilot Application";
+        }
+    });
+
+    // Prefill monthly bill from URL params if available (for ROI calculator)
+    // This runs independently of the modal prefill
+    const urlParamsForRoi = new URLSearchParams(window.location.search);
+    let monthlyBillForRoi = urlParamsForRoi.get('bill');
+    
+    // Fallback to session storage for ROI calculator prefill
+    if (!monthlyBillForRoi) {
+        monthlyBillForRoi = sessionStorage.getItem('quiz_bill');
+    }
+
+    if (monthlyBillForRoi && !isNaN(monthlyBillForRoi)) {
+        monthlyBillInput.value = monthlyBillForRoi;
+        // Optionally, automatically calculate when prefilled
+        // calculateRoiBtn.click();
+    }
+
+    // Exit-Intent Trigger
+    document.addEventListener('mouseout', function(e) {
+        // Check if the mouse is moving towards the top of the viewport (clientY < 10)
+        // and if it's leaving the document body (e.toElement is null and e.relatedTarget is null)
+        // and if the modal hasn't been opened yet.
+        if (!e.toElement && !e.relatedTarget && e.clientY < 10 && !hasModalBeenOpened) {
+            openPilotModal();
+        }
+    });
+});
+</script>
+
+</body>
+</html>

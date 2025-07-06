@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is Your Building Quietly Bleeding Energy? - SentientZone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light Blue-Gray Background */
+            color: #3d3d3d;
+        }
+        .bg-primary { background-color: #0044cc; }
+        .text-primary { color: #0044cc; }
+        .bg-secondary { background-color: #00aaff; }
+        .text-secondary { color: #00aaff; }
+        .bg-accent { background-color: #ffc400; }
+        .text-accent { color: #ffc400; }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 2rem;
+        }
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: #4a5568;
+            max-width: 600px;
+            margin: 1rem auto 0 auto;
+        }
+        .quiz-question {
+            margin-bottom: 2.5rem;
+        }
+        .quiz-option {
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+        .quiz-option input[type="radio"],
+        .quiz-option input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+        .quiz-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 0.5rem;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+            transition: border-color 0.2s;
+        }
+        .quiz-input:focus {
+            outline: none;
+            border-color: #0044cc;
+            box-shadow: 0 0 0 3px rgba(0, 68, 204, 0.2);
+        }
+        .quiz-result-section {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.5s ease-out, max-height 0.7s ease-out;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+        .quiz-result-section.show {
+            opacity: 1;
+            max-height: 500px; /* Adjust as needed to contain content */
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .message-box {
+            background-color: #e0f2fe; /* Light blue for info */
+            color: #0044cc;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: none; /* Hidden by default */
+        }
+        .message-box.error {
+            background-color: #fee2e2; /* Light red for error */
+            color: #dc2626;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="bg-primary text-white py-20 px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">Is Your Building Quietly Bleeding Energy?</h1>
+            <p class="text-lg md:text-2xl text-blue-200 mb-8">Take the 60-second diagnostic to uncover hidden HVAC waste—no technical knowledge needed.</p>
+        </div>
+    </div>
+
+    <div class="py-20 bg-white">
+        <section class="max-w-3xl mx-auto px-4">
+            <div class="card p-8">
+                <form id="silentLossQuiz" class="text-left">
+                    <div class="quiz-question">
+                        <label class="block text-xl font-bold mb-3 text-primary">1. What type of space best describes your building?</label>
+                        <select id="spaceType" name="spaceType" class="quiz-input text-lg">
+                            <option value="">Select an option</option>
+                            <option value="office">Office Building</option>
+                            <option value="school">School/University</option>
+                            <option value="gym">Gym/Fitness Center</option>
+                            <option value="retail">Retail Store/Mall</option>
+                            <option value="hospitality">Hotel/Hospitality</option>
+                            <option value="other">Other Commercial</option>
+                        </select>
+                    </div>
+
+                    <div class="quiz-question">
+                        <label class="block text-xl font-bold mb-3 text-primary">2. Do occupants regularly adjust thermostats or complain about comfort?</label>
+                        <div class="mt-2">
+                            <label class="quiz-option">
+                                <input type="radio" name="thermostatAdjust" value="yes"> Yes, frequently
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="thermostatAdjust" value="sometimes"> Sometimes
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="thermostatAdjust" value="no"> No, rarely or never
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <label class="block text-xl font-bold mb-3 text-primary">3. How often are rooms or zones in your building empty but still receiving heating or cooling?</label>
+                        <div class="mt-2">
+                            <label class="quiz-option">
+                                <input type="radio" name="emptyRooms" value="frequently"> Frequently (multiple hours/day)
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="emptyRooms" value="sometimes"> Sometimes (a few hours/day)
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="emptyRooms" value="rarely"> Rarely or never
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <label class="block text-xl font-bold mb-3 text-primary">4. Was your primary HVAC system installed or significantly overhauled in the last 7 years?</label>
+                        <div class="mt-2">
+                            <label class="quiz-option">
+                                <input type="radio" name="hvacAge" value="yes"> Yes
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="hvacAge" value="no"> No, it's older
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="hvacAge" value="unsure"> Unsure
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <label class="block text-xl font-bold mb-3 text-primary">5. What is your estimated average monthly energy bill for the entire building?</label>
+                        <input type="number" id="monthlyEnergyBill" name="monthlyEnergyBill" class="quiz-input text-lg" placeholder="$ Amount (e.g., 2500)" min="0">
+                    </div>
+
+                    <button type="submit" class="w-full bg-accent text-primary font-bold py-4 px-8 rounded-full text-xl hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
+                        Reveal My Risk
+                    </button>
+                </form>
+
+                <div id="quizResult" class="quiz-result-section mt-12">
+                    <h3 class="text-3xl font-extrabold text-primary mb-4">HVAC Energy Leak Risk: <span id="riskLevel"></span></h3>
+                    <p class="text-xl text-gray-700 mb-6">Projected Annual Waste: <span id="projectedWaste" class="font-bold text-red-600"></span></p>
+                    
+                    <!-- Email Gate -->
+                    <form id="emailGateForm" action="https://getform.io/f/byvyddxa" method="POST" class="mt-8 text-center">
+                        <p class="text-lg font-semibold mb-4">Want your full savings report + install guide?</p>
+                        <input type="email" id="quizEmail" name="email" class="quiz-input max-w-md mx-auto mb-4 block text-lg" placeholder="you@yourcompany.com" required />
+                        <!-- add hidden Honeypot input to prevent spams -->
+                        <input type="hidden" name="_gotcha" style="display:none !important">
+                        <button type="submit" id="unlockProofBtn" class="bg-accent text-primary font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
+                            Send My ROI + Unlock Next Step
+                        </button>
+                        <div id="emailMessage" class="message-box hidden"></div>
+                    </form>
+
+                    <a id="quizCta" href="#" class="hidden mt-6 inline-block bg-secondary text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-blue-600 transition-colors duration-300 shadow-lg">
+                        See Proof + Calculate Your Payback
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>&copy; 2025 SentientZone. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('silentLossQuiz').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let riskScore = 0;
+            const monthlyBill = parseFloat(document.getElementById('monthlyEnergyBill').value);
+
+            // Q1: Type of space (general weighting, can be refined)
+            const spaceType = document.getElementById('spaceType').value;
+            if (spaceType === 'office' || spaceType === 'school' || spaceType === 'retail') riskScore += 2;
+            else if (spaceType === 'gym' || spaceType === 'hospitality') riskScore += 3;
+            else if (spaceType === 'other') riskScore += 1;
+
+            // Q2: Thermostat adjustment
+            const thermostatAdjust = document.querySelector('input[name="thermostatAdjust"]:checked')?.value;
+            if (thermostatAdjust === 'yes') riskScore += 3;
+            else if (thermostatAdjust === 'sometimes') riskScore += 2;
+
+            // Q3: Empty rooms conditioned
+            const emptyRooms = document.querySelector('input[name="emptyRooms"]:checked')?.value;
+            if (emptyRooms === 'frequently') riskScore += 4;
+            else if (emptyRooms === 'sometimes') riskScore += 2;
+
+            // Q4: HVAC age
+            const hvacAge = document.querySelector('input[name="hvacAge"]:checked')?.value;
+            if (hvacAge === 'no' || hvacAge === 'unsure') riskScore += 2;
+
+            let riskLevel = 'LOW';
+            if (riskScore >= 7) {
+                riskLevel = 'HIGH';
+            } else if (riskScore >= 4) {
+                riskLevel = 'MEDIUM';
+            }
+
+            // Calculate projected waste
+            let projectedWasteAmount = 0;
+            if (!isNaN(monthlyBill) && monthlyBill > 0) {
+                // Assuming HVAC is ~40% of commercial energy bill and SentientZone saves 18-30%
+                // We'll use a conservative 20% for initial projection on quiz page
+                const annualTotalBill = monthlyBill * 12;
+                const annualHVACCost = annualTotalBill * 0.40;
+                projectedWasteAmount = annualHVACCost * 0.20; // 20% waste estimation for the quiz
+            }
+
+            document.getElementById('riskLevel').textContent = riskLevel;
+            document.getElementById('projectedWaste').textContent = `$${projectedWasteAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+
+            const quizResultSection = document.getElementById('quizResult');
+            quizResultSection.classList.add('show');
+
+            // Construct URL parameters for the /proof page
+            const params = new URLSearchParams();
+            params.set('risk', riskLevel);
+            params.set('bill', monthlyBill);
+            
+            document.getElementById('quizCta').href = `/proof?${params.toString()}`;
+
+            // Scroll to the result section
+            quizResultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        // Email Gate Logic
+        document.getElementById('emailGateForm').addEventListener('submit', async function (e) {
+            e.preventDefault(); // Prevent default form submission to handle with fetch
+
+            const emailInput = document.getElementById('quizEmail');
+            const email = emailInput.value.trim();
+            const unlockProofBtn = document.getElementById('unlockProofBtn');
+            const emailMessage = document.getElementById('emailMessage');
+
+            emailMessage.style.display = 'none'; // Hide previous messages
+
+            if (!email || !email.includes('@')) {
+                emailMessage.textContent = 'Please enter a valid email address.';
+                emailMessage.classList.add('error');
+                emailMessage.classList.remove('hidden');
+                emailMessage.style.display = 'block';
+                return;
+            }
+
+            unlockProofBtn.disabled = true;
+            unlockProofBtn.textContent = "Sending...";
+
+            try {
+                const formData = new FormData(this); // 'this' refers to the form element
+                // You can add hidden fields for riskLevel and projectedWaste if you want to capture them in Getform
+                formData.append('riskLevel', document.getElementById('riskLevel').textContent);
+                formData.append('projectedWaste', document.getElementById('projectedWaste').textContent);
+
+                const response = await fetch(this.action, {
+                    method: this.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json' // Important for Getform to return JSON
+                    }
+                });
+
+                if (response.ok) {
+                    emailMessage.textContent = "Email sent! You're unlocked. Click below to proceed.";
+                    emailMessage.classList.remove('error');
+                    emailMessage.classList.remove('hidden');
+                    emailMessage.style.display = 'block';
+                    document.getElementById('quizCta').classList.remove('hidden');
+                    emailInput.disabled = true;
+                    unlockProofBtn.textContent = "Unlocked!";
+                } else {
+                    emailMessage.textContent = "Failed to send email. Please try again.";
+                    emailMessage.classList.add('error');
+                    emailMessage.classList.remove('hidden');
+                    emailMessage.style.display = 'block';
+                    unlockProofBtn.disabled = false;
+                    unlockProofBtn.textContent = "Send My ROI + Unlock Next Step";
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                emailMessage.textContent = "An error occurred. Please try again.";
+                emailMessage.classList.add('error');
+                emailMessage.classList.remove('hidden');
+                emailMessage.style.display = 'block';
+                unlockProofBtn.disabled = false;
+                unlockProofBtn.textContent = "Send My ROI + Unlock Next Step";
+            }
+        });
+    </script>
+
+</body>
+</html>
