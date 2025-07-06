@@ -8,113 +8,35 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Light Blue-Gray Background */
-            color: #3d3d3d;
-        }
-        .bg-primary { background-color: #0044cc; }
-        .text-primary { color: #0044cc; }
-        .bg-secondary { background-color: #00aaff; }
-        .text-secondary { color: #00aaff; }
-        .bg-accent { background-color: #ffc400; }
-        .text-accent { color: #ffc400; }
-        .card {
-            background-color: white;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            padding: 2rem;
-        }
-        .section-title {
-            font-size: 2.25rem;
-            font-weight: 800;
-            line-height: 1.2;
-        }
-        .section-subtitle {
-            font-size: 1.125rem;
-            color: #4a5568;
-            max-width: 600px;
-            margin: 1rem auto 0 auto;
-        }
-        .flow-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            flex: 1;
-            min-width: 250px;
-        }
-        .flow-arrow {
-            font-size: 2.5rem;
-            color: #a0aec0;
-            margin: 0 1rem;
-            flex-shrink: 0;
-        }
-        .table-header {
-            background-color: #e2e8f0;
-            color: #3d3d3d;
-            font-weight: 600;
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #cbd5e0;
-        }
-        .table-row {
-            background-color: white;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .table-cell {
-            padding: 1rem;
-            text-align: left;
-        }
-        .dashboard-metric {
-            background-color: #f8f7f4;
-            border-radius: 0.75rem;
-            padding: 1rem;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .dashboard-toggle-button {
-            background-color: #e2e8f0;
-            color: #4a5568;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: background-color 0.2s, color 0.2s;
-        }
-        .dashboard-toggle-button.active {
-            background-color: #0044cc;
-            color: white;
-        }
-        .learn-more-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-in-out;
-            background-color: #fdfdfd;
-            border-radius: 0 0 0.75rem 0.75rem;
-            border: 1px solid #e2e8f0;
-            border-top: none;
-            padding: 0 1.5rem; /* Padding applied when content is shown */
-        }
-        .learn-more-content.show {
-            max-height: 500px; /* Adjust as needed */
-            padding-bottom: 1.5rem;
-            padding-top: 1.5rem;
-        }
-    </style>
+    <link rel="stylesheet" href="/styles/global.css"> <!-- Link to global CSS -->
 </head>
 <body class="text-gray-800">
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1899574337508255');
+    fbq('track', 'PageView');
+    fbq('trackCustom', 'ViewedHowItWorks'); // Custom event for this page
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1899574337508255&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
 
     <!-- High-Level Frame: "Finally, HVAC That Thinks" -->
     <div class="bg-primary text-white py-20 px-4 text-center">
         <div class="max-w-4xl mx-auto">
             <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">Finally, HVAC That Thinks.</h1>
             <p class="text-lg md:text-2xl text-blue-200 mb-8">SentientZone translates complex environmental control into clear, intuitive understanding for your building.</p>
-            <a href="#three-part-stack" class="inline-block bg-accent text-primary font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
+            <a href="#three-part-stack" id="exploreSystemBtn" class="inline-block bg-accent text-primary font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
                 Explore the System
             </a>
         </div>
@@ -254,7 +176,7 @@
         <section class="max-w-4xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Deploy in 90 Minutes Per Zone.</h2>
             <p class="text-lg md:text-xl text-blue-200 mb-8">Experience intelligent comfort and significant savings without the disruption. It's fast, non-invasive, and incredibly effective.</p>
-            <a href="sentientzonewa.com/pilot" class="inline-block bg-accent text-primary font-bold py-4 px-10 rounded-full text-xl hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
+            <a href="sentientzonewa.com/pilot" id="schedulePilotBtn" class="inline-block bg-accent text-primary font-bold py-4 px-10 rounded-full text-xl hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
                 Schedule a Pilot Walkthrough
             </a>
         </section>
@@ -278,77 +200,10 @@
         </div>
     </footer>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Learn More Toggle for 3-Part Stack
-    document.querySelectorAll('.learn-more-toggle').forEach(button => {
-        button.addEventListener('click', function() {
-            const content = this.nextElementSibling;
-            content.classList.toggle('show');
-            if (content.classList.contains('show')) {
-                this.textContent = 'Learn less ▲';
-            } else {
-                this.textContent = 'Learn more ▼';
-            }
-        });
-    });
-
-    // Dashboard Demo Logic
-    const dashboardMetricsDiv = document.getElementById('dashboardMetrics');
-    const dashboardBeforeBtn = document.getElementById('dashboardBeforeBtn');
-    const dashboardAfterBtn = document.getElementById('dashboardAfterBtn');
-
-    const dashboardData = {
-        before: [
-            { label: 'Avg. Comfort Score', value: '6/10', icon: '😞' },
-            { label: 'HVAC Runtime (Daily)', value: '18 hrs', icon: '⏳' },
-            { label: 'Energy Waste (Unoccupied)', value: '25%', icon: '💸' },
-            { label: 'Override Frequency', value: 'High', icon: '👆' }
-        ],
-        after: [
-            { label: 'Avg. Comfort Score', value: '9/10', icon: '😊' },
-            { label: 'HVAC Runtime (Daily)', value: '11 hrs', icon: '✅' },
-            { label: 'Energy Waste (Unoccupied)', value: '5%', icon: '💰' },
-            { label: 'Override Frequency', value: 'Low', icon: '🧘' }
-        ]
-    };
-
-    function renderDashboardMetrics(state) {
-        dashboardMetricsDiv.innerHTML = dashboardData[state].map(metric => `
-            <div class="dashboard-metric">
-                <span class="text-2xl mr-2">${metric.icon}</span>
-                <span>${metric.label}:</span>
-                <span class="font-bold text-primary">${metric.value}</span>
-            </div>
-        `).join('');
-    }
-
-    // Initial render
-    renderDashboardMetrics('before');
-
-    dashboardBeforeBtn.addEventListener('click', function() {
-        renderDashboardMetrics('before');
-        dashboardBeforeBtn.classList.add('active');
-        dashboardAfterBtn.classList.remove('active');
-    });
-
-    dashboardAfterBtn.addEventListener('click', function() {
-        renderDashboardMetrics('after');
-        dashboardAfterBtn.classList.add('active');
-        dashboardBeforeBtn.classList.remove('active');
-    });
-
-    // Smooth scrolling for CTA buttons, if they link to sections
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-});
-</script>
+    <!-- External JavaScript files -->
+    <script src="/scripts/pixel-events.js"></script>
+    <script src="/scripts/ui-behaviors.js"></script>
+    <script src="/scripts/dashboard-demo.js"></script>
 
 </body>
 </html>

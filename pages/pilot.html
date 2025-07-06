@@ -8,197 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Light Blue-Gray Background */
-            color: #3d3d3d;
-        }
-        .bg-primary { background-color: #0044cc; }
-        .text-primary { color: #0044cc; }
-        .bg-secondary { background-color: #00aaff; }
-        .text-secondary { color: #00aaff; }
-        .bg-accent { background-color: #ffc400; }
-        .text-accent { color: #ffc400; }
-        .card {
-            background-color: white;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            padding: 2rem;
-        }
-        .section-title {
-            font-size: 2.25rem;
-            font-weight: 800;
-            line-height: 1.2;
-        }
-        .section-subtitle {
-            font-size: 1.125rem;
-            color: #4a5568;
-            max-width: 600px;
-            margin: 1rem auto 0 auto;
-        }
-        .override-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            flex: 1;
-            min-width: 150px;
-        }
-        .override-arrow {
-            font-size: 2rem;
-            color: #a0aec0;
-            margin: 0.5rem 0;
-        }
-        .table-header {
-            background-color: #e2e8f0;
-            color: #3d3d3d;
-            font-weight: 600;
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #cbd5e0;
-        }
-        .table-row {
-            background-color: white;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .table-cell {
-            padding: 1rem;
-            text-align: left;
-        }
-        .accordion-button {
-            background-color: #fff;
-            border: 1px solid #e2e8f0;
-            width: 100%;
-            text-align: left;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.2s;
-        }
-        .accordion-button:hover {
-            background-color: #edf2f7;
-        }
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-in-out;
-            background-color: #fff;
-            border-radius: 0 0 0.75rem 0.75rem;
-            border: 1px solid #e2e8f0;
-            border-top: none;
-        }
-        .accordion-content.show {
-            max-height: 1000px; /* Sufficiently large to show content */
-        }
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-        }
-        .modal-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-content {
-            background-color: white;
-            padding: 2.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            max-width: 600px; /* Increased max-width for form */
-            width: 90%;
-            text-align: center;
-            position: relative;
-            max-height: 90vh; /* Ensure it fits on smaller screens */
-            overflow-y: auto; /* Enable scrolling for content overflow */
-        }
-        .modal-close-button {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #a0aec0;
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #3d3d3d;
-        }
-        .form-group input[type="text"],
-        .form-group input[type="email"],
-        .form-group input[type="number"],
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #cbd5e0;
-            border-radius: 0.5rem;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
-            transition: border-color 0.2s;
-        }
-        .form-group input[type="text"]:focus,
-        .form-group input[type="email"]:focus,
-        .form-group input[type="number"]:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #0044cc;
-            box-shadow: 0 0 0 3px rgba(0, 68, 204, 0.2);
-        }
-        .form-group textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-        .form-radio-option {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        .form-radio-option input {
-            margin-right: 0.5rem;
-        }
-        .message-box {
-            background-color: #e0f2fe; /* Light blue for info */
-            color: #0044cc;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            display: none; /* Hidden by default */
-        }
-        .message-box.error {
-            background-color: #fee2e2; /* Light red for error */
-            color: #dc2626;
-        }
-        .message-box.success {
-            background-color: #dcfce7; /* Light green for success */
-            color: #16a34a;
-        }
-    </style>
+    <link rel="stylesheet" href="/styles/global.css"> <!-- Link to global CSS -->
 </head>
-<body>
+<body class="text-gray-800">
 
     <!-- Meta Pixel Code -->
     <script>
@@ -212,6 +24,51 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1899574337508255');
     fbq('track', 'PageView');
+
+    // Event: ROI Calculation Engagement
+    document.getElementById('calculateRoiBtn')?.addEventListener('click', function () {
+      if (typeof fbq === 'function') { // Check if fbq is defined
+        fbq('track', 'ViewContent', {
+          content_name: 'ROI Calculator',
+          content_category: 'HVAC Savings',
+          value: 0, // Value can be dynamically updated if calculated
+          currency: 'USD'
+        });
+      }
+    });
+
+    // Event: Pilot Application Intent (Button Clicks)
+    document.getElementById('applyPilotBtn')?.addEventListener('click', function () {
+      if (typeof fbq === 'function') {
+        fbq('track', 'InitiateCheckout', {
+          content_name: 'Pilot Program',
+          content_category: 'SentientZone Funnel'
+        });
+      }
+    });
+
+    document.getElementById('qualifyBtn')?.addEventListener('click', function () {
+      if (typeof fbq === 'function') {
+        fbq('track', 'InitiateCheckout', {
+          content_name: 'Qualification Check',
+          content_category: 'SentientZone Funnel'
+        });
+      }
+    });
+
+    // Event: Form Submission (Lead)
+    // This event should fire when the pilot application form is successfully submitted.
+    // The actual form submission is handled in roi-calc.js, so we'll add a custom event
+    // or ensure this listener is attached to the form's submit event.
+    // For now, attaching directly to the form's submit event.
+    document.getElementById('pilotApplicationForm')?.addEventListener('submit', function () {
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead', {
+          content_name: 'Pilot Application',
+          content_category: 'SentientZone Funnel'
+        });
+      }
+    });
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1899574337508255&ev=PageView&noscript=1"
@@ -448,314 +305,10 @@
         </div>
     </footer>
 
-    <!-- Pilot Interest Form Modal -->
-    <div id="pilotInterestModal" class="modal-overlay">
-        <div class="modal-content">
-            <button class="modal-close-button" onclick="closePilotModal()">×</button>
-            <h3 class="text-2xl font-bold text-primary mb-4">Apply for a SentientZone Pilot</h3>
-            <p class="text-gray-700 mb-6">Tell us a bit about your building and your needs. We'll get back to you within 1-2 business days.</p>
-            
-            <form id="pilotApplicationForm" action="https://getform.io/f/byvyddxa" method="POST" class="text-left">
-                <input type="hidden" name="_gotcha" style="display:none !important">
-                <input type="hidden" name="source_page" value="pilot_page">
-                <input type="hidden" name="quiz_risk_level" id="quizRiskLevelHidden">
-                <input type="hidden" name="quiz_monthly_bill" id="quizMonthlyBillHidden">
-
-                <div class="form-group">
-                    <label for="fullName">Your Full Name <span class="text-red-500">*</span></label>
-                    <input type="text" id="fullName" name="full_name" required>
-                </div>
-                <div class="form-group">
-                    <label for="workEmail">Work Email <span class="text-red-500">*</span></label>
-                    <input type="email" id="workEmail" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="yourRole">Your Role <span class="text-red-500">*</span></label>
-                    <input type="text" id="yourRole" name="role" placeholder="e.g., Facilities Manager, Operations Head" required>
-                </div>
-                <div class="form-group">
-                    <label for="buildingType">Building Type <span class="text-red-500">*</span></label>
-                    <select id="buildingType" name="building_type" class="w-full" required>
-                        <option value="">Select your building type</option>
-                        <option value="office">Office Building</option>
-                        <option value="school">School/University</option>
-                        <option value="gym">Gym/Fitness Center</option>
-                        <option value="retail">Retail Store/Mall</option>
-                        <option value="hospitality">Hotel/Hospitality</option>
-                        <option value="other">Other Commercial</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="buildingSqFtForm">Building Size (Sq Ft)</label>
-                    <input type="number" id="buildingSqFtForm" name="building_sq_ft" placeholder="e.g., 10000">
-                </div>
-                <div class="form-group">
-                    <label for="hvacSetup">Briefly describe your current HVAC setup</label>
-                    <textarea id="hvacSetup" name="hvac_setup" placeholder="e.g., Centralized VAV system, multiple packaged units"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="currentIssues">What are your biggest HVAC challenges or pain points? (e.g., complaints, high bills, overrides)</label>
-                    <textarea id="currentIssues" name="current_issues" placeholder="e.g., Constant hot/cold complaints, high energy bills in empty areas"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Do you have decision-making authority for this pilot? <span class="text-red-500">*</span></label>
-                    <div class="flex space-x-4 mt-2">
-                        <label class="form-radio-option">
-                            <input type="radio" name="decision_authority" value="yes" required> Yes
-                        </label>
-                        <label class="form-radio-option">
-                            <input type="radio" name="decision_authority" value="no"> No
-                        </label>
-                    </div>
-                    <p id="decisionAuthorityNote" class="text-sm text-gray-600 mt-2 hidden">If 'No', please ensure a decision-maker is available for follow-up discussions.</p>
-                </div>
-                <div class="form-group">
-                    <label for="pilotWorthIt">What would make this pilot a success for you?</label>
-                    <textarea id="pilotWorthIt" name="pilot_success_criteria" placeholder="e.g., 20% energy savings, 50% reduction in complaints"></textarea>
-                </div>
-
-                <div id="formMessage" class="message-box hidden"></div>
-
-                <button type="submit" class="w-full bg-primary text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg mt-6">
-                    Submit Pilot Application
-                </button>
-            </form>
-        </div>
-    </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Event: ROI Calculation Engagement
-    document.getElementById('calculateRoiBtn')?.addEventListener('click', function () {
-      fbq('track', 'ViewContent', {
-        content_name: 'ROI Calculator',
-        content_category: 'HVAC Savings',
-        value: 0,
-        currency: 'USD'
-      });
-    });
-
-    // Event: Pilot Application Intent (Button Clicks)
-    document.getElementById('applyPilotBtn')?.addEventListener('click', function () {
-      fbq('track', 'InitiateCheckout', {
-        content_name: 'Pilot Program',
-        content_category: 'SentientZone Funnel'
-      });
-    });
-
-    document.getElementById('qualifyBtn')?.addEventListener('click', function () {
-      fbq('track', 'InitiateCheckout', {
-        content_name: 'Qualification Check',
-        content_category: 'SentientZone Funnel'
-      });
-    });
-
-    // Event: Form Submission (Lead)
-    document.getElementById('pilotApplicationForm')?.addEventListener('submit', function () {
-      fbq('track', 'Lead', {
-        content_name: 'Pilot Application',
-        content_category: 'SentientZone Funnel'
-      });
-    });
-
-    const deepDiveToggle = document.getElementById('deepDiveToggle');
-    const deepDiveContent = document.getElementById('deepDiveContent');
-    const deepDiveIcon = deepDiveToggle.querySelector('.accordion-icon');
-
-    deepDiveToggle.addEventListener('click', function() {
-        deepDiveContent.classList.toggle('show');
-        if (deepDiveContent.classList.contains('show')) {
-            deepDiveIcon.classList.add('rotate-180');
-        } else {
-            deepDiveIcon.classList.remove('rotate-180');
-        }
-    });
-
-    // Smooth scrolling for CTA buttons, if they link to sections
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-
-    // ROI Calculator Logic (existing, enhanced with prefill)
-    const calculateRoiBtn = document.getElementById('calculateRoiBtn');
-    const monthlyBillInput = document.getElementById('monthlyBill');
-    const buildingSqFtInput = document.getElementById('buildingSqFt');
-    const estimatedSavingsSpan = document.getElementById('estimatedSavings');
-    const paybackPeriodSpan = document.getElementById('paybackPeriod');
-
-    calculateRoiBtn.addEventListener('click', function() {
-        const monthlyBill = parseFloat(monthlyBillInput.value);
-
-        if (isNaN(monthlyBill) || monthlyBill <= 0) {
-            estimatedSavingsSpan.textContent = '$0';
-            paybackPeriodSpan.textContent = '0 Years';
-            return;
-        }
-
-        const annualTotalBill = monthlyBill * 12;
-        const annualHVACCost = annualTotalBill * 0.40; // Assuming 40% of bill is HVAC
-        const annualSavings = annualHVACCost * 0.30; // Assuming 30% savings on HVAC
-
-        const estimatedPilotCost = 6000; // Average estimated pilot cost for calculation
-
-        const paybackPeriod = annualSavings > 0 ? (estimatedPilotCost / annualSavings).toFixed(1) : 'N/A';
-
-        estimatedSavingsSpan.textContent = `$${annualSavings.toFixed(0)}`;
-        paybackPeriodSpan.textContent = `${paybackPeriod} Years`;
-    });
-
-    // Pilot Interest Form Modal Logic
-    const pilotInterestModal = document.getElementById('pilotInterestModal');
-    const applyPilotBtn = document.getElementById('applyPilotBtn');
-    const qualifyBtn = document.getElementById('qualifyBtn');
-    const pilotApplicationForm = document.getElementById('pilotApplicationForm');
-    const formMessage = document.getElementById('formMessage');
-    const decisionAuthorityRadios = document.querySelectorAll('input[name="decision_authority"]');
-    const decisionAuthorityNote = document.getElementById('decisionAuthorityNote');
-
-    // Hidden fields for prefilling from quiz
-    const quizRiskLevelHidden = document.getElementById('quizRiskLevelHidden');
-    const quizMonthlyBillHidden = document.getElementById('quizMonthlyBillHidden');
-
-    let hasModalBeenOpened = false; // Flag to track if the modal has been opened
-
-    function openPilotModal() {
-        if (pilotInterestModal.classList.contains('show')) {
-            return; // Prevent opening if already open
-        }
-        pilotInterestModal.classList.add('show');
-        hasModalBeenOpened = true; // Set flag to true
-
-        // Prefill from URL params first
-        const urlParams = new URLSearchParams(window.location.search);
-        let monthlyBillFromSource = urlParams.get('bill');
-        let riskLevelFromSource = urlParams.get('risk');
-
-        // Fallback to Session Storage if no URL params
-        if (!monthlyBillFromSource) {
-            monthlyBillFromSource = sessionStorage.getItem('quiz_bill');
-        }
-        if (!riskLevelFromSource) {
-            riskLevelFromSource = sessionStorage.getItem('quiz_risk');
-        }
-
-        if (monthlyBillFromSource && !isNaN(monthlyBillFromSource)) {
-            document.getElementById('buildingSqFtForm').value = ''; // Clear if not directly mapped, or prefill with a calculated value
-            document.getElementById('currentIssues').value = `High energy bills (approx. $${monthlyBillFromSource}/month)`;
-            quizMonthlyBillHidden.value = monthlyBillFromSource;
-        }
-        if (riskLevelFromSource) {
-            quizRiskLevelHidden.value = riskLevelFromSource;
-            // You could also dynamically add text to the form based on risk if desired
-        }
-    }
-
-    window.closePilotModal = function() {
-        pilotInterestModal.classList.remove('show');
-        pilotApplicationForm.reset(); // Reset form on close
-        formMessage.style.display = 'none'; // Hide messages
-        formMessage.classList.remove('error', 'success');
-        decisionAuthorityNote.classList.add('hidden'); // Hide note
-    };
-
-    applyPilotBtn.addEventListener('click', openPilotModal);
-    qualifyBtn.addEventListener('click', openPilotModal);
-
-    // Close modal if clicked outside content
-    pilotInterestModal.addEventListener('click', function(event) {
-        if (event.target === pilotInterestModal) {
-            closePilotModal();
-        }
-    });
-
-    // Conditional display for Decision Authority Note
-    decisionAuthorityRadios.forEach(radio => {
-        radio.addEventListener('change', function() {
-            if (this.value === 'no') {
-                decisionAuthorityNote.classList.remove('hidden');
-            } else {
-                decisionAuthorityNote.classList.add('hidden');
-            }
-        });
-    });
-
-    // Pilot Application Form Submission (using Getform)
-    pilotApplicationForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        formMessage.style.display = 'none'; // Hide previous messages
-        formMessage.classList.remove('error', 'success');
-
-        const submitButton = this.querySelector('button[type="submit"]');
-        submitButton.disabled = true;
-        submitButton.textContent = "Submitting...";
-
-        try {
-            const formData = new FormData(this);
-            
-            const response = await fetch(this.action, {
-                method: this.method,
-                body: formData,
-                headers: {
-                    'Accept': 'application/json' 
-                }
-            });
-
-            if (response.ok) {
-                formMessage.textContent = "Application submitted successfully! We'll be in touch shortly.";
-                formMessage.classList.add('success');
-                formMessage.style.display = 'block';
-                pilotApplicationForm.reset(); // Clear form fields
-                decisionAuthorityNote.classList.add('hidden'); // Hide note
-                setTimeout(closePilotModal, 3000); // Close modal after 3 seconds
-            } else {
-                formMessage.textContent = "Failed to submit application. Please try again.";
-                formMessage.classList.add('error');
-                formMessage.style.display = 'block';
-            }
-        } catch (error) {
-            console.error('Error submitting pilot form:', error);
-            formMessage.textContent = "An error occurred. Please try again.";
-            formMessage.classList.add('error');
-            formMessage.style.display = 'block';
-        } finally {
-            submitButton.disabled = false;
-            submitButton.textContent = "Submit Pilot Application";
-        }
-    });
-
-    // Prefill monthly bill from URL params if available (for ROI calculator)
-    // This runs independently of the modal prefill
-    const urlParamsForRoi = new URLSearchParams(window.location.search);
-    let monthlyBillForRoi = urlParamsForRoi.get('bill');
-    
-    // Fallback to session storage for ROI calculator prefill
-    if (!monthlyBillForRoi) {
-        monthlyBillForRoi = sessionStorage.getItem('quiz_bill');
-    }
-
-    if (monthlyBillForRoi && !isNaN(monthlyBillForRoi)) {
-        monthlyBillInput.value = monthlyBillForRoi;
-        // Optionally, automatically calculate when prefilled
-        // calculateRoiBtn.click();
-    }
-
-    // Exit-Intent Trigger
-    document.addEventListener('mouseout', function(e) {
-        // Check if the mouse is moving towards the top of the viewport (clientY < 10)
-        // and if it's leaving the document body (e.toElement is null and e.relatedTarget is null)
-        // and if the modal hasn't been opened yet.
-        if (!e.toElement && !e.relatedTarget && e.clientY < 10 && !hasModalBeenOpened) {
-            openPilotModal();
-        }
-    });
-});
-</script>
+    <!-- External JavaScript files -->
+    <script src="/scripts/pixel-events.js"></script>
+    <script src="/scripts/ui-behaviors.js"></script>
+    <script src="/scripts/dashboard-demo.js"></script>
 
 </body>
 </html>

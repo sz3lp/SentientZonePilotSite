@@ -3,165 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SentientZone: Proof, Not Promises - Verified HVAC Results</title>
+    <title>SentientZone: Proof, Not Promises</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <!-- jsPDF CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Light Blue-Gray Background */
-            color: #3d3d3d;
-        }
-        .bg-primary { background-color: #0044cc; }
-        .text-primary { color: #0044cc; }
-        .bg-secondary { background-color: #00aaff; }
-        .text-secondary { color: #00aaff; }
-        .bg-accent { background-color: #ffc400; }
-        .text-accent { color: #ffc400; }
-        .card {
-            background-color: white;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            padding: 2rem;
-        }
-        .section-title {
-            font-size: 2.25rem;
-            font-weight: 800;
-            line-height: 1.2;
-        }
-        .section-subtitle {
-            font-size: 1.125rem;
-            color: #4a5568;
-            max-width: 600px;
-            margin: 1rem auto 0 auto;
-        }
-        .table-header {
-            background-color: #e2e8f0;
-            color: #3d3d3d;
-            font-weight: 600;
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #cbd5e0;
-        }
-        .table-row {
-            background-color: white;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .table-cell {
-            padding: 1rem;
-            text-align: left;
-        }
-        .accordion-button {
-            background-color: #fff;
-            border: 1px solid #e2e8f0;
-            width: 100%;
-            text-align: left;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.2s;
-        }
-        .accordion-button:hover {
-            background-color: #edf2f7;
-        }
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-in-out;
-            background-color: #fff;
-            border-radius: 0 0 0.75rem 0.75rem;
-            border: 1px solid #e2e8f0;
-            border-top: none;
-        }
-        .accordion-content.show {
-            max-height: 1000px; /* Sufficiently large to show content */
-        }
-        .chart-container {
-            position: relative;
-            height: 300px;
-            width: 100%;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .risk-banner {
-            background-color: #fef3c7; /* Light yellow for warning */
-            color: #b45309; /* Darker yellow/orange for text */
-            padding: 1.5rem 1rem;
-            text-align: center;
-            font-size: 1.125rem;
-            font-weight: 600;
-            display: none; /* Hidden by default */
-        }
-        .risk-banner.high {
-            background-color: #fee2e2; /* Light red for high risk */
-            color: #dc2626;
-        }
-        .risk-banner.medium {
-            background-color: #fff3e0; /* Lighter orange for medium risk */
-            color: #fb923c;
-        }
-        .risk-banner.low {
-            background-color: #dcfce7; /* Light green for low risk */
-            color: #16a34a;
-        }
-        .message-box {
-            background-color: #e0f2fe; /* Light blue for info */
-            color: #0044cc;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            display: none; /* Hidden by default */
-        }
-        .message-box.error {
-            background-color: #fee2e2; /* Light red for error */
-            color: #dc2626;
-        }
-    </style>
+    <link rel="stylesheet" href="/styles/global.css"> <!-- Link to global CSS -->
 </head>
-<body class="text-gray-800">
+<body>
 
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1899574337508255');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1899574337508255&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Hero Section -->
     <div class="bg-primary text-white py-20 px-4 text-center">
         <div class="max-w-4xl mx-auto">
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">Proof, Not Promises.</h1>
-            <p class="text-lg md:text-2xl text-blue-200 mb-8">You don't need to believe us. Just look at the data. Quantified results from real buildings, verified by real people.</p>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">You don’t need to believe us. Just look at the data.</h1>
+            <p class="text-lg md:text-2xl text-blue-200 mb-8">Quantified results from real buildings, verified by real people.</p>
             <a href="#case-studies" class="inline-block bg-accent text-primary font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
-                See Case Studies
+                See Our Case Studies
             </a>
         </div>
     </div>
 
-    <!-- Dynamic Risk Level Banner -->
-    <div id="riskBanner" class="risk-banner">
+    <div id="riskBanner" class="bg-red-100 text-red-800 py-6 px-4 text-center hidden">
         <div class="max-w-4xl mx-auto">
-            <p class="text-xl font-bold mb-2">Your HVAC risk is <span id="bannerRiskLevel" class="text-current"></span>.</p>
+            <p class="text-xl font-bold mb-2">Your Risk Level: <span id="bannerRiskLevel" class="text-red-900"></span></p>
             <p class="text-lg">Spaces like yours saved between <span class="font-bold">18–30%</span> using zone intelligence. Here’s how they did it...</p>
         </div>
     </div>
 
-    <!-- High-Impact Case Study Grid -->
     <div id="case-studies" class="py-20 bg-white">
-        <section class="max-w-6xl mx-auto px-4 text-center">
-            <h2 class="section-title text-primary">Real Results from Real Buildings</h2>
-            <p class="section-subtitle">SentientZone delivers tangible improvements in comfort, energy efficiency, and operational simplicity across diverse environments.</p>
+        <section class="max-w-5xl mx-auto px-4 text-center">
+            <h2 class="section-title text-primary">High-Impact Case Studies</h2>
+            <p class="section-subtitle">Real-world outcomes demonstrating SentientZone's effectiveness in diverse environments.</p>
 
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-                <div class="card p-6 text-left flex flex-col items-start">
-                    <p class="text-5xl mb-4">🏢</p>
-                    <h3 class="font-bold text-xl mb-2 text-primary">Coworking Space</h3>
-                    <ul class="text-gray-700 text-lg space-y-1 mb-4 w-full">
-                        <li>✅ <span class="font-bold">90% fewer complaints</span></li>
-                        <li>✅ <span class="font-bold">25% HVAC runtime reduction</span></li>
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-6 text-left">
+                    <div class="flex items-center mb-4">
+                        <span class="text-5xl mr-4">🏢</span>
+                        <div>
+                            <h3 class="text-2xl font-bold text-primary">Coworking Space</h3>
+                            <p class="text-gray-600">Dynamic environment, high occupant turnover.</p>
+                        </div>
+                    </div>
+                    <ul class="list-disc list-inside text-lg text-gray-700 mb-4">
+                        <li>90% fewer comfort complaints</li>
+                        <li>25% HVAC runtime reduction</li>
                     </ul>
-                    <p class="italic text-gray-600 mb-4">"SentientZone transformed our tenant satisfaction and saved us a fortune."</p>
-                    <button class="toggle-case-study mt-auto inline-block bg-secondary text-white font-semibold py-2 px-6 rounded-full hover:bg-blue-600 transition-colors duration-300">Read More ▼</button>
+                    <p class="italic text-gray-700">"SentientZone transformed our tenant satisfaction and saved us a fortune."</p>
+                    <button class="toggle-case-study mt-4 text-primary font-semibold hover:text-blue-700 transition-colors duration-200">
+                        Read More ▼
+                    </button>
                     <div class="case-study-detail hidden mt-4 text-gray-700 text-sm">
                         <p>This bustling coworking space struggled with constant temperature battles. Implementing SentientZone's adaptive zoning dramatically improved individual comfort, leading to a significant drop in complaints. The system's intelligence also optimized HVAC operation, cutting energy waste during fluctuating occupancy.</p>
                         <p class="mt-2 font-semibold">Key Metrics:</p>
@@ -172,15 +82,23 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card p-6 text-left flex flex-col items-start">
-                    <p class="text-5xl mb-4">🏫</p>
-                    <h3 class="font-bold text-xl mb-2 text-primary">Indie School</h3>
-                    <ul class="text-gray-700 text-lg space-y-1 mb-4 w-full">
-                        <li>✅ <span class="font-bold">22% overall energy bill drop</span></li>
-                        <li>✅ <span class="font-bold">No expensive retrofit needed</span></li>
+
+                <div class="card p-6 text-left">
+                    <div class="flex items-center mb-4">
+                        <span class="text-5xl mr-4">🏫</span>
+                        <div>
+                            <h3 class="text-2xl font-bold text-primary">Indie School</h3>
+                            <p class="text-gray-600">Varied classroom schedules, budget-conscious.</p>
+                        </div>
+                    </div>
+                    <ul class="list-disc list-inside text-lg text-gray-700 mb-4">
+                        <li>22% overall energy bill drop</li>
+                        <li>No expensive HVAC retrofit needed</li>
                     </ul>
-                    <p class="italic text-gray-600 mb-4">"Simple installation, profound impact. Our school is now more comfortable and our budget healthier."</p>
-                    <button class="toggle-case-study mt-auto inline-block bg-secondary text-white font-semibold py-2 px-6 rounded-full hover:bg-blue-600 transition-colors duration-300">Read More ▼</button>
+                    <p class="italic text-gray-700">"We got big-building efficiency without the big-building price tag or disruption."</p>
+                    <button class="toggle-case-study mt-4 text-primary font-semibold hover:text-blue-700 transition-colors duration-200">
+                        Read More ▼
+                    </button>
                     <div class="case-study-detail hidden mt-4 text-gray-700 text-sm">
                         <p>For this independent school, energy costs were a major concern. SentientZone provided granular control over classrooms and common areas, ensuring comfort only when and where needed. The non-invasive installation meant no downtime, which was crucial during the school year.</p>
                         <p class="mt-2 font-semibold">Key Metrics:</p>
@@ -191,15 +109,23 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card p-6 text-left flex flex-col items-start">
-                    <p class="text-5xl mb-4">🧘</p>
-                    <h3 class="font-bold text-xl mb-2 text-primary">Wellness Studio</h3>
-                    <ul class="text-gray-700 text-lg space-y-1 mb-4 w-full">
-                        <li>✅ <span class="font-bold">98% occupant satisfaction</span></li>
-                        <li>✅ <span class="font-bold">15% absenteeism decline</span></li>
+
+                <div class="card p-6 text-left">
+                    <div class="flex items-center mb-4">
+                        <span class="text-5xl mr-4">🧘</span>
+                        <div>
+                            <h3 class="text-2xl font-bold text-primary">Wellness Studio</h3>
+                            <p class="text-gray-600">Temperature-sensitive activities, client experience focus.</p>
+                        </div>
+                    </div>
+                    <ul class="list-disc list-inside text-lg text-gray-700 mb-4">
+                        <li>98% occupant satisfaction</li>
+                        <li>15% absenteeism decline among staff</li>
                     </ul>
-                    <p class="italic text-gray-600 mb-4">"Our clients notice the difference. A calm, consistent environment is crucial for wellness, and SentientZone delivers."</p>
-                    <button class="toggle-case-study mt-auto inline-block bg-secondary text-white font-semibold py-2 px-6 rounded-full hover:bg-blue-600 transition-colors duration-300">Read More ▼</button>
+                    <p class="italic text-gray-700">"Our clients notice the difference. It's a huge part of our high-end experience."</p>
+                    <button class="toggle-case-study mt-4 text-primary font-semibold hover:text-blue-700 transition-colors duration-200">
+                        Read More ▼
+                    </button>
                     <div class="case-study-detail hidden mt-4 text-gray-700 text-sm">
                         <p>Precision temperature control is vital for a wellness studio offering yoga and meditation. SentientZone enabled perfect climate conditions in each studio room, leading to rave reviews from clients and a noticeable improvement in staff well-being and attendance.</p>
                         <p class="mt-2 font-semibold">Key Metrics:</p>
@@ -210,15 +136,23 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card p-6 text-left flex flex-col items-start">
-                    <p class="text-5xl mb-4">🎨</p>
-                    <h3 class="font-bold text-xl mb-2 text-primary">Creative Agency</h3>
-                    <ul class="text-gray-700 text-lg space-y-1 mb-4 w-full">
-                        <li>✅ <span class="font-bold">Real-time energy maps</span></li>
-                        <li>✅ <span class="font-bold">Improved IT/ops collaboration</span></li>
+
+                <div class="card p-6 text-left">
+                    <div class="flex items-center mb-4">
+                        <span class="text-5xl mr-4">🎨</span>
+                        <div>
+                            <h3 class="text-2xl font-bold text-primary">Creative Agency</h3>
+                            <p class="text-gray-600">Open-plan office, diverse work zones.</p>
+                        </div>
+                    </div>
+                    <ul class="list-disc list-inside text-lg text-gray-700 mb-4">
+                        <li>Real-time energy maps for IT/ops</li>
+                        <li>Improved cross-functional collaboration</li>
                     </ul>
-                    <p class="italic text-gray-600 mb-4">"The data helps us see exactly what's happening. No more guessing games."</p>
-                    <button class="toggle-case-study mt-auto inline-block bg-secondary text-white font-semibold py-2 px-6 rounded-full hover:bg-blue-600 transition-colors duration-300">Read More ▼</button>
+                    <p class="italic text-gray-700">"The data helps us see exactly what's happening. No more guessing games."</p>
+                    <button class="toggle-case-study mt-4 text-primary font-semibold hover:text-blue-700 transition-colors duration-200">
+                        Read More ▼
+                    </button>
                     <div class="case-study-detail hidden mt-4 text-gray-700 text-sm">
                         <p>In a dynamic creative agency, different teams had different comfort needs. SentientZone provided the granularity to optimize each zone. More importantly, its intuitive dashboard gave IT and operations teams shared, real-time insights, streamlining decision-making and reducing friction.</p>
                         <p class="mt-2 font-semibold">Key Metrics:</p>
@@ -232,91 +166,46 @@
         </section>
     </div>
 
-    <div class="py-20 bg-gray-100">
+    <div class="py-20 bg-white">
         <section class="max-w-5xl mx-auto px-4 text-center">
-            <h2 class="section-title text-primary">The ROI Math: It Just Makes Financial Sense.</h2>
-            <p class="section-subtitle">Stop leaving money on the table. SentientZone delivers rapid payback and significant long-term returns, transforming HVAC from a cost center into a value driver.</p>
+            <h2 class="section-title text-primary">The ROI Math: How it Makes Financial Sense</h2>
+            <p class="section-subtitle">We answer it before you ask. SentientZone isn't just about comfort; it's a smart investment with rapid returns.</p>
 
-            <div class="mt-12 card p-8 flex flex-col items-center">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 w-full">
-                    <div class="text-center">
-                        <p class="text-5xl font-extrabold text-accent">8.3</p>
-                        <p class="text-lg font-semibold text-gray-700">Avg Payback (Months)</p>
+            <div class="mt-12 card max-w-2xl mx-auto p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="text-left">
+                        <label for="monthlyBill" class="block text-gray-700 text-sm font-bold mb-2">Avg. Monthly Energy Bill ($)</label>
+                        <input type="number" id="monthlyBill" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="e.g., 2500">
                     </div>
-                    <div class="text-center">
-                        <p class="text-5xl font-extrabold text-accent">~380%</p>
-                        <p class="text-lg font-semibold text-gray-700">Annualized Return</p>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-5xl font-extrabold text-accent">30%+</p>
-                        <p class="text-lg font-semibold text-gray-700">Energy Savings</p>
+                    <div class="text-left">
+                        <label for="buildingSqFt" class="block text-gray-700 text-sm font-bold mb-2">Building Size (Sq Ft)</label>
+                        <input type="number" id="buildingSqFt" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="e.g., 10000">
                     </div>
                 </div>
-
-                <div class="chart-container">
-                    <canvas id="roiChart"></canvas>
-                </div>
-
-                <p class="mt-8 text-gray-700 text-lg text-left w-full max-w-xl">
-                    Beyond direct energy savings, SentientZone reduces common cost-avoidance metrics:
-                </p>
-                <ul class="list-disc list-inside text-gray-700 text-lg text-left w-full max-w-xl mt-4 space-y-2">
-                    <li>Reduced service calls due to optimized equipment cycles.</li>
-                    <li>Less equipment strain leads to extended HVAC lifespan.</li>
-                    <li>Fewer occupant complaints free up facility management time.</li>
-                    <li>Improved productivity from enhanced comfort.</li>
-                </ul>
-
-                <div class="mt-8 pt-6 border-t border-gray-200 w-full">
-                    <h3 class="font-bold text-xl mb-4 text-primary">Personalized ROI Estimate:</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div class="text-left">
-                            <label for="monthlyBill" class="block text-gray-700 text-sm font-bold mb-2">Avg. Monthly Energy Bill ($)</label>
-                            <input type="number" id="monthlyBill" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="e.g., 2500">
-                        </div>
-                        <div class="text-left">
-                            <label for="buildingSqFt" class="block text-gray-700 text-sm font-bold mb-2">Building Size (Sq Ft)</label>
-                            <input type="number" id="buildingSqFt" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="e.g., 10000">
-                        </div>
-                    </div>
-                    <button id="calculateRoiBtn" class="bg-primary text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition-colors duration-300 shadow-lg">
-                        Calculate My Payback
-                    </button>
-                    <div class="mt-8 text-center">
-                        <p class="text-gray-600 text-lg">Estimated Annual Savings: <span id="estimatedSavings" class="font-bold text-primary">$0</span></p>
-                        <p class="text-gray-600 text-lg">Projected Payback Period: <span id="paybackPeriod" class="font-bold text-primary">0 Years</span></p>
-                        <p class="text-sm text-gray-500 mt-2">Based on typical commercial building data and an estimated pilot cost of $6,000. Individual results may vary.</p>
-                    </div>
-                </div>
-
-                <!-- Email Gate for PDF -->
-                <div id="pdfEmailGate" class="mt-8 text-center hidden">
-                    <p class="text-lg font-semibold mb-4">Want your full ROI report? Enter your email to download.</p>
-                    <form id="pdfEmailForm" action="https://getform.io/f/byvyddxa" method="POST" class="max-w-md mx-auto">
-                        <input type="email" id="pdfEmailInput" name="email" class="quiz-input mb-4 block text-lg" placeholder="you@yourcompany.com" required />
-                        <input type="hidden" name="_gotcha" style="display:none !important">
-                        <input type="hidden" name="riskLevel" id="hiddenRiskLevel">
-                        <input type="hidden" name="monthlyBill" id="hiddenMonthlyBill">
-                        <input type="hidden" name="estimatedSavings" id="hiddenEstimatedSavings">
-                        <input type="hidden" name="paybackPeriod" id="hiddenPaybackPeriod">
-                        <button type="submit" id="submitPdfEmailBtn" class="bg-accent text-primary font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
-                            Submit & Download Report
-                        </button>
-                        <div id="pdfEmailMessage" class="message-box hidden"></div>
-                    </form>
-                </div>
-
-                <button id="downloadRoiPdfBtn" class="inline-block mt-8 bg-accent text-primary font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
-                    Download Pilot ROI Pack (PDF)
+                <button id="calculateRoiBtn" class="bg-primary text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition-colors duration-300 shadow-lg">
+                    Calculate My Payback
                 </button>
+                <div class="mt-8 text-center">
+                    <p class="text-gray-600 text-lg">Estimated Annual Savings: <span id="estimatedSavings" class="font-bold text-primary">$0</span></p>
+                    <p class="text-gray-600 text-lg">Projected Payback Period: <span id="paybackPeriod" class="font-bold text-primary">0 Years</span></p>
+                    <p class="text-sm text-gray-500 mt-2">Based on typical commercial building data and an estimated pilot cost of $6,000. Individual results may vary.</p>
+                </div>
+                 <div class="mt-8 pt-6 border-t border-gray-200">
+                    <p class="text-gray-700 text-lg mb-2">Avg. Payback: <span class="font-bold text-primary">8.3 months</span></p>
+                    <p class="text-gray-700 text-lg mb-2">Long-term Annualized Return: <span class="font-bold text-primary">~380%</span></p>
+                    <p class="text-gray-700 text-lg">Common Cost Avoidance: <span class="font-bold text-primary">Reduced service calls, less equipment strain, fewer productivity losses.</span></p>
+                </div>
             </div>
+            <a href="sentientzonewa.com/pilot" class="inline-block mt-8 bg-secondary text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-blue-600 transition-colors duration-300 shadow-lg" id="estimateRoiCta">
+                Estimate Your ROI
+            </a>
         </section>
     </div>
 
-    <div class="py-20 bg-white">
+    <div class="py-20 bg-gray-100">
         <section class="max-w-5xl mx-auto px-4 text-center">
-            <h2 class="section-title text-primary">Why SentientZone? We're Not Your Old Solution.</h2>
-            <p class="section-subtitle">You already have a BMS, Nest, or Ecobee — why bother? Because traditional systems are built on outdated paradigms. SentientZone is different.</p>
+            <h2 class="section-title text-primary">Comparison Validation: Why SentientZone is Different</h2>
+            <p class="section-subtitle">"We already have a BMS / Nest / Ecobee — why bother?" SentientZone fills critical gaps that traditional systems can't.</p>
 
             <div class="mt-12 overflow-x-auto">
                 <table class="min-w-full bg-white rounded-lg shadow-lg">
@@ -325,7 +214,7 @@
                             <th class="table-header rounded-tl-lg">Feature</th>
                             <th class="table-header">BMS</th>
                             <th class="table-header">Smart Thermostat</th>
-                            <th class="table-header rounded-tr-lg">SentientZone</th>
+                            <th class="table-header rounded-tr-lg text-primary">SentientZone</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -333,122 +222,117 @@
                             <td class="table-cell font-semibold">Decentralized Zone Control</td>
                             <td class="table-cell">❌</td>
                             <td class="table-cell">❌</td>
-                            <td class="table-cell text-primary font-bold">✅</td>
+                            <td class="table-cell text-primary font-medium">✅</td>
                         </tr>
                         <tr class="table-row">
                             <td class="table-cell font-semibold">Per-User Feedback Loops</td>
                             <td class="table-cell">❌</td>
                             <td class="table-cell">Limited</td>
-                            <td class="table-cell text-primary font-bold">✅</td>
+                            <td class="table-cell text-primary font-medium">✅</td>
                         </tr>
                         <tr class="table-row">
                             <td class="table-cell font-semibold">Override Protection Logic</td>
                             <td class="table-cell">❌</td>
                             <td class="table-cell">❌</td>
-                            <td class="table-cell text-primary font-bold">✅</td>
+                            <td class="table-cell text-primary font-medium">✅</td>
                         </tr>
                         <tr class="table-row">
                             <td class="table-cell font-semibold">Self-Calibrating Mesh Sensor Network</td>
                             <td class="table-cell">❌</td>
                             <td class="table-cell">❌</td>
-                            <td class="table-cell text-primary font-bold">✅</td>
+                            <td class="table-cell text-primary font-medium">✅</td>
                         </tr>
                         <tr class="table-row">
-                            <td class="table-cell font-semibold rounded-bl-lg">No Contractor Needed for Install</td>
+                            <td class="table-cell font-semibold rounded-bl-lg">No Contractor Needed (for initial setup)</td>
                             <td class="table-cell">❌</td>
                             <td class="table-cell">❌</td>
-                            <td class="table-cell text-primary font-bold">✅</td>
+                            <td class="table-cell text-primary font-medium rounded-br-lg">✅</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
     </div>
-    
-    <div class="py-20 bg-gray-100">
+
+    <div class="py-20 bg-white">
         <section class="max-w-5xl mx-auto px-4 text-center">
-            <h2 class="section-title text-primary">Certified Trust: Compliance & Enterprise Readiness</h2>
-            <p class="section-subtitle">SentientZone isn't just innovative; it's built to integrate seamlessly and comply with industry standards, ensuring peace of mind for IT, operations, and finance.</p>
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                <div class="card p-6 flex flex-col items-center">
-                    <p class="text-5xl mb-2">🔒</p>
-                    <h3 class="text-xl font-bold text-primary">ASHRAE 55 Compliant</h3>
-                    <p class="text-gray-600 mt-1">Meets thermal comfort standards.</p>
+            <h2 class="section-title text-primary">Certification & Compliance</h2>
+            <p class="section-subtitle">Built to enterprise standards, ensuring reliability, interoperability, and regulatory fit.</p>
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-4xl mx-auto">
+                <div class="flex flex-col items-center p-4">
+                    <span class="text-5xl text-secondary mb-2">🔒</span>
+                    <p class="font-bold text-lg text-gray-700 text-center">ASHRAE 55 Compliant</p>
                 </div>
-                <div class="card p-6 flex flex-col items-center">
-                    <p class="text-5xl mb-2">🏛️</p>
-                    <h3 class="text-xl font-bold text-primary">Title 24 Ready</h3>
-                    <p class="text-gray-600 mt-1">Aligns with California energy codes.</p>
+                <div class="flex flex-col items-center p-4">
+                    <span class="text-5xl text-secondary mb-2">🏛️</span>
+                    <p class="font-bold text-lg text-gray-700 text-center">Title 24 Ready</p>
                 </div>
-                <div class="card p-6 flex flex-col items-center">
-                    <p class="text-5xl mb-2">🔌</p>
-                    <h3 class="text-xl font-bold text-primary">OpenADR Compatible</h3>
-                    <p class="text-gray-600 mt-1">Supports demand response programs.</p>
+                <div class="flex flex-col items-center p-4">
+                    <span class="text-5xl text-secondary mb-2">🔌</span>
+                    <p class="font-bold text-lg text-gray-700 text-center">OpenADR Compatible</p>
                 </div>
-                <div class="card p-6 flex flex-col items-center">
-                    <p class="text-5xl mb-2">🧠</p>
-                    <h3 class="text-xl font-bold text-primary">AI Override Logic Transparent</h3>
-                    <p class="text-gray-600 mt-1">Understandable adaptive comfort algorithms.</p>
+                <div class="flex flex-col items-center p-4">
+                    <span class="text-5xl text-secondary mb-2">🧠</span>
+                    <p class="font-bold text-lg text-gray-700 text-center">AI Override Logic Transparent</p>
                 </div>
-                <div class="card p-6 flex flex-col items-center">
-                    <p class="text-5xl mb-2">🧩</p>
-                    <h3 class="text-xl font-bold text-primary">BACnet Integration Certified</h3>
-                    <p class="text-gray-600 mt-1">Seamlessly connects with existing BMS.</p>
+                <div class="flex flex-col items-center p-4">
+                    <span class="text-5xl text-secondary mb-2">🧩</span>
+                    <p class="font-bold text-lg text-gray-700 text-center">BACnet Integration Certified</p>
                 </div>
             </div>
         </section>
     </div>
 
-    <div class="py-20 bg-white">
+    <div class="py-20 bg-gray-100">
         <section class="max-w-5xl mx-auto px-4 text-center">
-            <h2 class="section-title text-primary">Doubt Destruction: Common Questions, Clear Answers</h2>
-            <p class="section-subtitle">We know you have questions. Here are clear answers to common hesitations, designed to put your mind at ease.</p>
+            <h2 class="section-title text-primary">Doubt Destruction: Common Questions Answered</h2>
+            <p class="section-subtitle">We've heard it all. Here are the facts that dismantle common hesitations.</p>
 
             <div class="mt-12 max-w-3xl mx-auto space-y-4">
                 <div class="accordion-item">
-                    <button id="faq1" class="accordion-button">
+                    <button class="accordion-button">
                         <span>Does it work with our current system?</span>
                         <span class="accordion-icon text-2xl transform rotate-0 transition-transform duration-300">▼</span>
                     </button>
                     <div class="accordion-content">
                         <div class="p-6 text-left text-gray-700">
-                            <p>Yes, absolutely. SentientZone is designed to wrap around your existing HVAC infrastructure. No replacement of core equipment or complex rewiring is required. It integrates seamlessly to provide intelligent zone control.</p>
+                            <p>Yes, absolutely. SentientZone is designed to wrap around your existing HVAC infrastructure. It's an overlay system, not a replacement. This means no expensive overhauls, no major downtime, and full compatibility with most modern and legacy systems.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="accordion-item">
-                    <button id="faq2" class="accordion-button">
+                    <button class="accordion-button">
                         <span>How does it install?</span>
                         <span class="accordion-icon text-2xl transform rotate-0 transition-transform duration-300">▼</span>
                     </button>
                     <div class="accordion-content">
                         <div class="p-6 text-left text-gray-700">
-                            <p>Installation is non-invasive and incredibly fast — typically under 90 minutes per zone. Our hardware is designed for simplicity, often adhering magnetically or with minimal mounting, with no electrical wiring changes needed for your core HVAC system.</p>
+                            <p>Installation is incredibly fast and non-invasive, taking under 90 minutes per zone. Our hardware is wireless and self-calibrating, requiring no complex wiring or professional contractors for the zone deployment itself. It's truly plug-and-play at the zone level.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="accordion-item">
-                    <button id="faq3" class="accordion-button">
+                    <button class="accordion-button">
                         <span>What if people override it?</span>
                         <span class="accordion-icon text-2xl transform rotate-0 transition-transform duration-300">▼</span>
                     </button>
                     <div class="accordion-content">
                         <div class="p-6 text-left text-gray-700">
-                            <p>Unlike traditional systems that fight overrides, SentientZone's AI adapts. It learns from occupant feedback and override patterns, integrating them into its logic to deliver personalized comfort without constant manual intervention. This reduces conflict and saves energy.</p>
+                            <p>Unlike traditional systems that fight overrides, SentientZone adapts. Our AI-driven logic learns from occupant feedback and override patterns, integrating them into its comfort strategy. This reduces the *need* for overrides by proactively delivering comfort, and when overrides do occur, the system learns rather than resists, maintaining efficiency.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="accordion-item">
-                    <button id="faq4" class="accordion-button">
-                        <span>Do we lose control?</span>
+                    <button class="accordion-button">
+                        <span>Do we lose control over our HVAC?</span>
                         <span class="accordion-icon text-2xl transform rotate-0 transition-transform duration-300">▼</span>
                     </button>
                     <div class="accordion-content">
                         <div class="p-6 text-left text-gray-700">
-                            <p>Quite the opposite. You gain unparalleled control, but with visibility and intelligent logic. Facility managers get granular data and insights into zone performance, while occupants experience greater comfort autonomy, leading to higher satisfaction and fewer complaints.</p>
+                            <p>Quite the opposite: you gain unprecedented control, visibility, and logic. SentientZone provides a granular dashboard showing real-time energy usage, occupancy patterns, and comfort scores by zone. You maintain central oversight while empowering individual zones with intelligent, autonomous decision-making capabilities. It's control with intelligence.</p>
                         </div>
                     </div>
                 </div>
@@ -458,10 +342,10 @@
 
     <div class="py-20 bg-primary text-white text-center">
         <section class="max-w-4xl mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-extrabold mb-4">See the Results Yourself. In Your Building.</h2>
-            <p class="text-lg md:text-xl text-blue-200 mb-8">Ready to move beyond promises and experience the verifiable impact of SentientZone?</p>
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Ready for Proven Savings and Comfort?</h2>
+            <p class="text-lg md:text-xl text-blue-200 mb-8">Take the next step: apply for a pilot and see the SentientZone difference in your building.</p>
             <a href="sentientzonewa.com/pilot" class="inline-block bg-accent text-primary font-bold py-4 px-10 rounded-full text-xl hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
-                Schedule a Pilot Walkthrough
+                Schedule a Pilot
             </a>
         </section>
     </div>
@@ -476,320 +360,17 @@
                 <span>•</span>
                 <span>OpenADR Compatible</span>
                 <span>•</span>
-                <span>BACnet Integrated</span>
-                <span>•</span>
                 <span>AI Override Logic Transparent</span>
+                <span>•</span>
+                <span>BACnet Integration Certified</span>
             </div>
         </div>
     </footer>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Parse URL parameters for dynamic banner and ROI prefill
-    const urlParams = new URLSearchParams(window.location.search);
-    const riskLevel = urlParams.get('risk');
-    const monthlyBillFromQuiz = urlParams.get('bill');
-
-    const riskBanner = document.getElementById('riskBanner');
-    const bannerRiskLevel = document.getElementById('bannerRiskLevel');
-    const monthlyBillInput = document.getElementById('monthlyBill');
-    const estimatedSavingsSpan = document.getElementById('estimatedSavings');
-    const paybackPeriodSpan = document.getElementById('paybackPeriod');
-    const calculateRoiBtn = document.getElementById('calculateRoiBtn');
-    const downloadRoiPdfBtn = document.getElementById('downloadRoiPdfBtn');
-
-    const pdfEmailGate = document.getElementById('pdfEmailGate');
-    const pdfEmailForm = document.getElementById('pdfEmailForm');
-    const pdfEmailInput = document.getElementById('pdfEmailInput');
-    const submitPdfEmailBtn = document.getElementById('submitPdfEmailBtn');
-    const pdfEmailMessage = document.getElementById('pdfEmailMessage');
-
-    const hiddenRiskLevel = document.getElementById('hiddenRiskLevel');
-    const hiddenMonthlyBill = document.getElementById('hiddenMonthlyBill');
-    const hiddenEstimatedSavings = document.getElementById('hiddenEstimatedSavings');
-    const hiddenPaybackPeriod = document.getElementById('hiddenPaybackPeriod');
-
-
-    let emailCapturedForPdf = false; // Flag to track if email has been captured
-
-    if (riskLevel) {
-        bannerRiskLevel.textContent = riskLevel;
-        riskBanner.classList.add(riskLevel.toLowerCase()); // Add class for styling (high, medium, low)
-        riskBanner.style.display = 'block'; // Make it visible
-    }
-
-    if (monthlyBillFromQuiz && !isNaN(monthlyBillFromQuiz)) {
-        if (monthlyBillInput) {
-            monthlyBillInput.value = monthlyBillFromQuiz;
-            // Automatically calculate if prefilled
-            calculateRoiBtn.click(); 
-        }
-    }
-
-    // ROI Calculator Logic
-    calculateRoiBtn.addEventListener('click', function() {
-        const monthlyBill = parseFloat(monthlyBillInput.value);
-
-        if (isNaN(monthlyBill) || monthlyBill <= 0) {
-            estimatedSavingsSpan.textContent = '$0';
-            paybackPeriodSpan.textContent = '0 Years';
-            return;
-        }
-
-        const annualTotalBill = monthlyBill * 12;
-        const annualHVACCost = annualTotalBill * 0.40; // Assuming 40% of bill is HVAC
-        const annualSavings = annualHVACCost * 0.30; // Assuming 30% savings on HVAC (consistent with 18-30% range mentioned)
-
-        const estimatedPilotCost = 6000; // Average estimated pilot cost for calculation
-
-        const paybackPeriod = annualSavings > 0 ? (estimatedPilotCost / annualSavings).toFixed(1) : 'N/A';
-
-        estimatedSavingsSpan.textContent = `$${annualSavings.toFixed(0)}`;
-        paybackPeriodSpan.textContent = `${paybackPeriod} Years`;
-
-        // Update hidden fields for Getform
-        hiddenRiskLevel.value = bannerRiskLevel.textContent;
-        hiddenMonthlyBill.value = monthlyBill;
-        hiddenEstimatedSavings.value = estimatedSavingsSpan.textContent;
-        hiddenPaybackPeriod.value = paybackPeriodSpan.textContent;
-    });
-
-    // Accordion Logic for Doubt Destruction module
-    document.querySelectorAll('.accordion-button').forEach(button => {
-        button.addEventListener('click', () => {
-            const content = button.nextElementSibling;
-            const icon = button.querySelector('.accordion-icon');
-
-            // Close other open accordions
-            document.querySelectorAll('.accordion-content.show').forEach(openContent => {
-                if (openContent !== content) {
-                    openContent.classList.remove('show');
-                    openContent.previousElementSibling.querySelector('.accordion-icon').classList.remove('rotate-180');
-                }
-            });
-
-            // Toggle current accordion
-            content.classList.toggle('show');
-            icon.classList.toggle('rotate-180');
-        });
-    });
-
-    // Case Study Toggle Logic (using the same accordion pattern)
-    document.querySelectorAll('.toggle-case-study').forEach(button => {
-        button.addEventListener('click', function() {
-            const detail = this.nextElementSibling;
-            const icon = this.querySelector('.accordion-icon'); // Assuming there's an icon for consistency
-
-            // Toggle visibility
-            detail.classList.toggle('hidden');
-            if (detail.classList.contains('hidden')) {
-                this.textContent = 'Read More ▼';
-                if (icon) icon.classList.remove('rotate-180');
-            } else {
-                this.textContent = 'Read Less ▲';
-                if (icon) icon.classList.add('rotate-180');
-            }
-        });
-    });
-
-
-    // ROI Chart (Conservative + Aggressive Payback)
-    const roiChartCtx = document.getElementById('roiChart').getContext('2d');
-    new Chart(roiChartCtx, {
-        type: 'line',
-        data: {
-            labels: ['Month 0', 'Month 2', 'Month 4', 'Month 6', 'Month 8', 'Month 10', 'Month 12'],
-            datasets: [
-                {
-                    label: 'Conservative Savings ($)',
-                    data: [0, 600, 1200, 1800, 2400, 3000, 3600], // Example: $300/month saving
-                    borderColor: '#00aaff',
-                    backgroundColor: 'rgba(0, 170, 255, 0.1)',
-                    fill: true,
-                    tension: 0.3,
-                    pointBackgroundColor: '#00aaff',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#ffc400',
-                    pointHoverBorderColor: '#fff'
-                },
-                {
-                    label: 'Aggressive Savings ($)',
-                    data: [0, 900, 1800, 2700, 3600, 4500, 5400], // Example: $450/month saving
-                    borderColor: '#0044cc',
-                    backgroundColor: 'rgba(0, 68, 204, 0.1)',
-                    fill: true,
-                    tension: 0.3,
-                    pointBackgroundColor: '#0044cc',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#ffc400',
-                    pointHoverBorderColor: '#fff'
-                }
-            ]
-        },
-        options: {
-            maintainAspectRatio: false,
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Cumulative Savings ($)'
-                    }
-                },
-                x: {
-                    grid: {
-                        display: false
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom'
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return `${context.dataset.label}: $${context.parsed.y}`;
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    // PDF Download Functionality
-    downloadRoiPdfBtn.addEventListener('click', function() {
-        if (!emailCapturedForPdf) {
-            // Show the email gate if email not captured
-            pdfEmailGate.classList.remove('hidden');
-            downloadRoiPdfBtn.classList.add('hidden'); // Hide original button
-            // Scroll to the email gate
-            pdfEmailGate.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } else {
-            // If email is already captured, proceed with PDF generation
-            generatePdf();
-        }
-    });
-
-    // Submit Email for PDF Download
-    pdfEmailForm.addEventListener('submit', async function (e) {
-        e.preventDefault(); // Prevent default form submission
-
-        const email = pdfEmailInput.value.trim();
-        pdfEmailMessage.style.display = 'none'; // Hide previous messages
-
-        if (!email || !email.includes('@')) {
-            pdfEmailMessage.textContent = 'Please enter a valid email address.';
-            pdfEmailMessage.classList.add('error');
-            pdfEmailMessage.style.display = 'block';
-            return;
-        }
-
-        submitPdfEmailBtn.disabled = true;
-        submitPdfEmailBtn.textContent = "Sending...";
-
-        try {
-            const formData = new FormData(this); // Get form data including hidden fields
-            
-            const response = await fetch(this.action, {
-                method: this.method,
-                body: formData,
-                headers: {
-                    'Accept': 'application/json' 
-                }
-            });
-
-            if (response.ok) {
-                emailCapturedForPdf = true; 
-                pdfEmailInput.disabled = true;
-                submitPdfEmailBtn.textContent = "Email Captured!";
-                pdfEmailMessage.textContent = "Thank you! Your report will download shortly.";
-                pdfEmailMessage.classList.remove('error');
-                pdfEmailMessage.style.display = 'block';
-
-                // Automatically trigger PDF download after successful email capture
-                setTimeout(generatePdf, 1500); 
-            } else {
-                pdfEmailMessage.textContent = "Failed to send email. Please try again.";
-                pdfEmailMessage.classList.add('error');
-                pdfEmailMessage.style.display = 'block';
-                submitPdfEmailBtn.disabled = false;
-                submitPdfEmailBtn.textContent = "Submit & Download Report";
-            }
-        } catch (error) {
-            console.error('Error submitting form:', error);
-            pdfEmailMessage.textContent = "An error occurred. Please try again.";
-            pdfEmailMessage.classList.add('error');
-            pdfEmailMessage.style.display = 'block';
-            submitPdfEmailBtn.disabled = false;
-            submitPdfEmailBtn.textContent = "Submit & Download Report";
-        }
-    });
-
-    // PDF Generation function (moved to be callable)
-    function generatePdf() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-
-        const monthlyBill = monthlyBillInput.value;
-        const estimatedSavings = estimatedSavingsSpan.textContent;
-        const paybackPeriod = paybackPeriodSpan.textContent;
-        const riskLevelText = bannerRiskLevel.textContent;
-        const capturedEmail = pdfEmailInput.value.trim(); // Include captured email in PDF
-
-        let yPos = 20;
-        doc.setFontSize(22);
-        doc.text("SentientZone Pilot ROI Report", 105, yPos, null, null, "center");
-        yPos += 15;
-
-        doc.setFontSize(14);
-        doc.text("Personalized Estimate for Your Building", 105, yPos, null, null, "center");
-        yPos += 20;
-
-        doc.setFontSize(12);
-        doc.text(`Your HVAC Risk Level: ${riskLevelText}`, 20, yPos);
-        yPos += 10;
-        doc.text(`Average Monthly Energy Bill: $${monthlyBill}`, 20, yPos);
-        yPos += 10;
-        doc.text(`Estimated Annual Savings: ${estimatedSavings}`, 20, yPos);
-        yPos += 10;
-        doc.text(`Projected Payback Period: ${paybackPeriod}`, 20, yPos);
-        yPos += 10;
-        doc.text(`Report sent to: ${capturedEmail}`, 20, yPos); // Display captured email
-        yPos += 20;
-
-        doc.setFontSize(14);
-        doc.text("General ROI Metrics:", 20, yPos);
-        yPos += 10;
-        doc.setFontSize(12);
-        doc.text(`Average Payback: 8.3 months`, 20, yPos);
-        yPos += 10;
-        doc.text(`Long-term Annualized Return: ~380%`, 20, yPos);
-        yPos += 10;
-        doc.text(`Common Cost Avoidance: Reduced service calls, less equipment strain, fewer productivity losses.`, 20, yPos);
-        yPos += 20;
-
-        doc.setFontSize(10);
-        doc.text("This report provides an estimate. Individual results may vary based on specific building characteristics and usage patterns.", 20, yPos);
-        yPos += 10;
-        doc.text("Learn more and apply for a pilot at sentientzonewa.com/pilot", 20, yPos);
-
-        doc.save('SentientZone_ROI_Report.pdf');
-    }
-
-    // Smooth scrolling for CTA buttons that link to sections
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-});
-</script>
+    <!-- External JavaScript files -->
+    <script src="/scripts/pixel-events.js"></script>
+    <script src="/scripts/roi-calc.js"></script>
+    <script src="/scripts/ui-behaviors.js"></script>
 
 </body>
 </html>

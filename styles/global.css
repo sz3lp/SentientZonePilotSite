@@ -1,0 +1,297 @@
+/* Global Styles for SentientZone Website */
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f4f8; /* Light Blue-Gray Background */
+    color: #3d3d3d;
+}
+
+/* Color Palette */
+.bg-primary { background-color: #0044cc; }
+.text-primary { color: #0044cc; }
+.bg-secondary { background-color: #00aaff; }
+.text-secondary { color: #00aaff; }
+.bg-accent { background-color: #ffc400; }
+.text-accent { color: #ffc400; }
+
+/* Card Styles */
+.card {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    padding: 2rem;
+}
+
+/* Section Titles and Subtitles */
+.section-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+.section-subtitle {
+    font-size: 1.125rem;
+    color: #4a5568;
+    max-width: 600px;
+    margin: 1rem auto 0 auto;
+}
+
+/* Form Input Styles (used across quiz and pilot forms) */
+.quiz-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 0.5rem;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+    transition: border-color 0.2s;
+}
+.quiz-input:focus {
+    outline: none;
+    border-color: #0044cc;
+    box-shadow: 0 0 0 3px rgba(0, 68, 204, 0.2);
+}
+
+/* Quiz-specific styles (can be generalized for other forms too) */
+.quiz-question {
+    margin-bottom: 2.5rem;
+}
+.quiz-option {
+    display: block;
+    margin-bottom: 0.75rem;
+}
+.quiz-option input[type="radio"],
+.quiz-option input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+.quiz-result-section {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease-out, max-height 0.7s ease-out;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+.quiz-result-section.show {
+    opacity: 1;
+    max-height: 500px; /* Adjust as needed to contain content */
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Table Styles (used in how.html and proof.html) */
+.table-header {
+    background-color: #e2e8f0;
+    color: #3d3d3d;
+    font-weight: 600;
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #cbd5e0;
+}
+.table-row {
+    background-color: white;
+    border-bottom: 1px solid #e2e8f0;
+}
+.table-cell {
+    padding: 1rem;
+    text-align: left;
+}
+
+/* Accordion Styles (used in how.html and proof.html) */
+.accordion-button {
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    width: 100%;
+    text-align: left;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+.accordion-button:hover {
+    background-color: #edf2f7;
+}
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    background-color: #fdfdfd; /* Lighter background for content */
+    border-radius: 0 0 0.75rem 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-top: none;
+    padding: 0 1.5rem; /* Padding applied when content is shown */
+}
+.accordion-content.show {
+    max-height: 1000px; /* Sufficiently large to show content */
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
+}
+
+/* Modal Styles (used in pilot.html) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+.modal-content {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.modal-close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #a0aec0;
+}
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #3d3d3d;
+}
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 0.5rem;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+    transition: border-color 0.2s;
+}
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="number"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #0044cc;
+    box-shadow: 0 0 0 3px rgba(0, 68, 204, 0.2);
+}
+.form-group textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+.form-radio-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+.form-radio-option input {
+    margin-right: 0.5rem;
+}
+.message-box {
+    background-color: #e0f2fe; /* Light blue for info */
+    color: #0044cc;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    display: none; /* Hidden by default */
+}
+.message-box.error {
+    background-color: #fee2e2; /* Light red for error */
+    color: #dc2626;
+}
+.message-box.success {
+    background-color: #dcfce7; /* Light green for success */
+    color: #16a34a;
+}
+
+/* Specific to how.html */
+.flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    min-width: 250px;
+}
+.flow-arrow {
+    font-size: 2.5rem;
+    color: #a0aec0;
+    margin: 0 1rem;
+    flex-shrink: 0;
+}
+.dashboard-metric {
+    background-color: #f8f7f4;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.dashboard-toggle-button {
+    background-color: #e2e8f0;
+    color: #4a5568;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+}
+.dashboard-toggle-button.active {
+    background-color: #0044cc;
+    color: white;
+}
+
+/* Specific to proof.html */
+.risk-banner {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: 600;
+    display: none; /* Hidden by default */
+}
+.risk-banner.high {
+    background-color: #fee2e2; /* Light red for high risk */
+    color: #dc2626;
+}
+.risk-banner.medium {
+    background-color: #fff3e0; /* Lighter orange for medium risk */
+    color: #fb923c;
+}
+.risk-banner.low {
+    background-color: #dcfce7; /* Light green for low risk */
+    color: #16a34a;
+}

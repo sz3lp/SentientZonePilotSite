@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/pages/pilot.html" },
+    { "source": "/pilot", "destination": "/pages/pilot.html" },
+    { "source": "/proof", "destination": "/pages/proof.html" },
+    { "source": "/how", "destination": "/pages/how.html" },
+    { "source": "/quiz", "destination": "/pages/quiz.html" }
+  ]
+}
