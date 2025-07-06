@@ -10,11 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/global.css"> <!-- Link to global CSS -->
-</head>
+    <link rel="stylesheet" href="/styles/global.css"> </head>
 <body>
 
-    <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -24,15 +22,12 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1899574337508255');
+    fbq('init', '1899574447508255'); // Updated Pixel ID for Proof page
     fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1899574337508255&ev=PageView&noscript=1"
+    src="https://www.facebook.com/tr?id=1899574447508255&ev=PageView&noscript=1"
     /></noscript>
-    <!-- End Meta Pixel Code -->
-
-    <!-- Hero Section -->
     <div class="bg-primary text-white py-20 px-4 text-center">
         <div class="max-w-4xl mx-auto">
             <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">You don’t need to believe us. Just look at the data.</h1>
@@ -174,11 +169,11 @@
             <div class="mt-12 card max-w-2xl mx-auto p-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div class="text-left">
-                        <label for="monthlyBill" class="block text-gray-700 text-sm font-bold mb-2">Avg. Monthly Energy Bill ($)</label>
+                        <label for="monthlyBill">Avg. Monthly Energy Bill ($)</label>
                         <input type="number" id="monthlyBill" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="e.g., 2500">
                     </div>
                     <div class="text-left">
-                        <label for="buildingSqFt" class="block text-gray-700 text-sm font-bold mb-2">Building Size (Sq Ft)</label>
+                        <label for="buildingSqFt">Building Size (Sq Ft)</label>
                         <input type="number" id="buildingSqFt" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="e.g., 10000">
                     </div>
                 </div>
@@ -196,7 +191,7 @@
                     <p class="text-gray-700 text-lg">Common Cost Avoidance: <span class="font-bold text-primary">Reduced service calls, less equipment strain, fewer productivity losses.</span></p>
                 </div>
             </div>
-            <a href="sentientzonewa.com/pilot" class="inline-block mt-8 bg-secondary text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-blue-600 transition-colors duration-300 shadow-lg" id="estimateRoiCta">
+            <a href="/pilot" class="inline-block mt-8 bg-secondary text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-blue-600 transition-colors duration-300 shadow-lg" id="estimateRoiCta">
                 Estimate Your ROI
             </a>
         </section>
@@ -344,7 +339,7 @@
         <section class="max-w-4xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Ready for Proven Savings and Comfort?</h2>
             <p class="text-lg md:text-xl text-blue-200 mb-8">Take the next step: apply for a pilot and see the SentientZone difference in your building.</p>
-            <a href="sentientzonewa.com/pilot" class="inline-block bg-accent text-primary font-bold py-4 px-10 rounded-full text-xl hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
+            <a href="/pilot" class="inline-block bg-accent text-primary font-bold py-4 px-10 rounded-full text-xl hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
                 Schedule a Pilot
             </a>
         </section>
@@ -367,10 +362,19 @@
         </div>
     </footer>
 
-    <!-- External JavaScript files -->
     <script src="/scripts/pixel-events.js"></script>
     <script src="/scripts/roi-calc.js"></script>
     <script src="/scripts/ui-behaviors.js"></script>
+
+    <script>
+        document.querySelectorAll('.toggle-case-study').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const content = this.nextElementSibling;
+                content.classList.toggle('hidden'); // Use 'hidden' for Tailwind's display: none
+                this.textContent = content.classList.contains('hidden') ? 'Read More ▼' : 'Read Less ▲';
+            });
+        });
+    </script>
 
 </body>
 </html>

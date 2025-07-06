@@ -8,11 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/global.css"> <!-- Link to global CSS -->
-</head>
+    <link rel="stylesheet" href="/styles/global.css"> </head>
 <body class="text-gray-800">
 
-    <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -37,45 +35,11 @@
       }
     });
 
-    // Event: Pilot Application Intent (Button Clicks)
-    document.getElementById('applyPilotBtn')?.addEventListener('click', function () {
-      if (typeof fbq === 'function') {
-        fbq('track', 'InitiateCheckout', {
-          content_name: 'Pilot Program',
-          content_category: 'SentientZone Funnel'
-        });
-      }
-    });
-
-    document.getElementById('qualifyBtn')?.addEventListener('click', function () {
-      if (typeof fbq === 'function') {
-        fbq('track', 'InitiateCheckout', {
-          content_name: 'Qualification Check',
-          content_category: 'SentientZone Funnel'
-        });
-      }
-    });
-
-    // Event: Form Submission (Lead)
-    // This event should fire when the pilot application form is successfully submitted.
-    // The actual form submission is handled in roi-calc.js, so we'll add a custom event
-    // or ensure this listener is attached to the form's submit event.
-    // For now, attaching directly to the form's submit event.
-    document.getElementById('pilotApplicationForm')?.addEventListener('submit', function () {
-      if (typeof fbq === 'function') {
-        fbq('track', 'Lead', {
-          content_name: 'Pilot Application',
-          content_category: 'SentientZone Funnel'
-        });
-      }
-    });
+    // Event: Form Submission (Lead) - This will be triggered by modal form submission
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1899574337508255&ev=PageView&noscript=1"
     /></noscript>
-    <!-- End Meta Pixel Code -->
-
-    <!-- Hero Section -->
     <div class="bg-primary text-white py-20 px-4 text-center">
         <div class="max-w-4xl mx-auto">
             <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">Your HVAC System Is Lying to You.</h1>
@@ -86,7 +50,6 @@
         </div>
     </div>
 
-    <!-- The Fracture Section -->
     <div id="fracture" class="py-20 bg-white">
         <section class="max-w-5xl mx-auto px-4 text-center">
             <h2 class="section-title text-primary">What You Already Know Is Broken</h2>
@@ -141,7 +104,6 @@
         </section>
     </div>
     
-    <!-- Proof Section -->
     <div class="py-20 bg-gray-100">
         <section class="max-w-5xl mx-auto px-4 text-center">
             <h2 class="section-title text-primary">Comfort that Listens. Energy that Obeys. Systems that Learn.</h2>
@@ -183,7 +145,6 @@
         </section>
     </div>
 
-    <!-- ROI Calculator Module -->
     <div class="py-20 bg-white">
         <section class="max-w-5xl mx-auto px-4 text-center">
             <h2 class="section-title text-primary">What You Could Save in 30 Days</h2>
@@ -212,7 +173,6 @@
         </section>
     </div>
 
-    <!-- Social Proof Module -->
     <div class="py-20 bg-gray-100">
         <section class="max-w-5xl mx-auto px-4 text-center">
             <h2 class="section-title text-primary">What Our Pilot Sites Are Saying</h2>
@@ -239,7 +199,6 @@
         </section>
     </div>
 
-    <!-- Trust Bar Above CTA -->
     <div class="bg-secondary text-white py-4 px-4 text-center">
         <div class="max-w-5xl mx-auto text-lg font-semibold flex flex-wrap justify-center items-center gap-x-6 gap-y-2">
             <span>✅ ASHRAE 55</span>
@@ -250,7 +209,6 @@
         </div>
     </div>
 
-    <!-- Call to Action — Pilot Framing -->
     <div class="py-20 bg-primary text-white text-center">
         <section class="max-w-4xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Be the Facility That Gets It Right First.</h2>
@@ -265,16 +223,15 @@
         </section>
     </div>
 
-    <!-- Optional Deep Dive – The Human Cost -->
     <div class="py-20 bg-gray-100">
         <section class="max-w-5xl mx-auto px-4 text-center">
             <h2 class="section-title text-primary">Optional Deep Dive: The Human Element of HVAC</h2>
             <p class="section-subtitle">For those who need to understand the full picture: how traditional systems impact human psychology and why true control is transformative.</p>
 
             <div class="mt-12 max-w-3xl mx-auto">
-                <button id="deepDiveToggle" class="accordion-button">
-                    <span>Click to Explore the Psychological Impact</span>
-                    <span class="accordion-icon text-2xl transform rotate-0 transition-transform duration-300">▼</span>
+                <button onclick="location.href='/proof#psych'" class="bg-white border border-gray-200 w-full text-left p-6 rounded-lg font-semibold hover:bg-gray-50 transition-colors duration-200 text-lg flex justify-between items-center">
+                    <span>Explore the Psychological Impact</span>
+                    <span class="text-2xl">→</span>
                 </button>
                 <div id="deepDiveContent" class="accordion-content">
                     <div class="p-6 text-left text-gray-700">
@@ -287,7 +244,72 @@
         </section>
     </div>
 
-    <!-- Footer -->
+    <div id="pilotModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-button" id="closeModalBtn">&times;</button>
+            <h3 class="text-3xl font-extrabold text-primary mb-4">Pilot Program Application</h3>
+            <p class="text-gray-700 mb-6">Tell us about your building to see if you qualify for the SentientZone Pilot Program.</p>
+            <form id="pilotApplicationForm" action="https://getform.io/f/your-getform-endpoint" method="POST">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="companyName">Company Name</label>
+                    <input type="text" id="companyName" name="companyName" required>
+                </div>
+                <div class="form-group">
+                    <label for="companyEmail">Company Email</label>
+                    <input type="email" id="companyEmail" name="companyEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="text" id="phoneNumber" name="phoneNumber">
+                </div>
+                <div class="form-group">
+                    <label for="buildingType">Building Type</label>
+                    <select id="buildingType" name="buildingType" class="w-full p-2 border rounded">
+                        <option value="">Select one</option>
+                        <option value="office">Office Building</option>
+                        <option value="retail">Retail Space</option>
+                        <option value="school">School/University</option>
+                        <option value="hospitality">Hotel/Hospitality</option>
+                        <option value="medical">Medical/Clinic</option>
+                        <option value="other">Other Commercial</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="buildingSqFtModal">Building Size (Sq Ft)</label>
+                    <input type="number" id="buildingSqFtModal" name="buildingSqFt" placeholder="e.g., 50000" min="0">
+                </div>
+                <div class="form-group">
+                    <label for="problemDescription">Briefly describe your current HVAC challenges:</label>
+                    <textarea id="problemDescription" name="problemDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <p class="block font-semibold mb-2 text-gray-700">How did you hear about us?</p>
+                    <label class="form-radio-option">
+                        <input type="radio" name="howHear" value="google"> Google Search
+                    </label>
+                    <label class="form-radio-option">
+                        <input type="radio" name="howHear" value="social"> Social Media
+                    </label>
+                    <label class="form-radio-option">
+                        <input type="radio" name="referral"> Referral
+                    </label>
+                    <label class="form-radio-option">
+                        <input type="radio" name="other"> Other
+                    </label>
+                </div>
+                <input type="hidden" name="_gotcha" style="display:none !important">
+                <button type="submit" class="bg-primary text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition-colors duration-300 shadow-lg w-full">
+                    Submit Application
+                </button>
+                <div id="formMessage" class="message-box mt-4 hidden"></div>
+            </form>
+        </div>
+    </div>
+
     <footer class="bg-white border-t border-gray-200 mt-16">
         <div class="container mx-auto px-6 py-8 text-center text-gray-500">
             <p>&copy; 2025 SentientZone. All rights reserved.</p>
@@ -305,10 +327,10 @@
         </div>
     </footer>
 
-    <!-- External JavaScript files -->
     <script src="/scripts/pixel-events.js"></script>
     <script src="/scripts/ui-behaviors.js"></script>
     <script src="/scripts/dashboard-demo.js"></script>
+    <script src="/scripts/roi-calc.js"></script>
 
 </body>
 </html>
