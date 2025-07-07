@@ -131,7 +131,7 @@
                         Projected Annual Waste: <span id="projectedWaste" class="font-bold text-red-600"></span>
                     </p>
                     
-                    <!-- Email Gate -->
+                    <!-- Email Gate - This form will now be submitted via Fetch, then redirect -->
                     <form id="emailGateForm" action="https://getform.io/f/byvyddxa" method="POST"
                                  class="mt-8 text-center">
                         <p class="text-lg font-semibold mb-4">
@@ -148,6 +148,7 @@
                         <div id="emailMessage" class="message-box hidden mt-4 text-red-600"></div>
                     </form>
 
+                    <!-- This CTA will now directly redirect to proof.html -->
                     <a id="quizCta" href="#" class="mt-6 inline-block bg-secondary text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-blue-600 transition-colors duration-300 shadow-lg">
                         See Proof + Calculate Your Payback
                     </a>
@@ -164,7 +165,7 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {
-        console.log("DOMContentLoaded fired. Quiz script loaded."); // Diagnostic 1
+        console.log("DOMContentLoaded fired. Quiz script loaded.");
         window.dataLayer = window.dataLayer || [];
 
         // Helper function to get radio button value
@@ -213,11 +214,8 @@
                 score += 1;
             }
 
-            // Adjust for space type if needed, e.g.,
-            // if (spaceType === 'office' || spaceType === 'retail') score += 1;
-
             const risk = (score >= 6) ? 'HIGH' : (score >= 3) ? 'MEDIUM' : 'LOW';
-            console.log("Calculated Risk Level:", risk, "Score:", score); // Diagnostic 2
+            console.log("Calculated Risk Level:", risk, "Score:", score);
             return risk;
         }
 
@@ -225,7 +223,7 @@
         function calculateProjectedAnnualWaste() {
             const monthlyEnergyBill = parseFloat(document.getElementById('monthlyEnergyBill').value);
             if (isNaN(monthlyEnergyBill) || monthlyEnergyBill <= 0) {
-                console.log("Monthly energy bill is invalid or zero."); // Diagnostic 3
+                console.log("Monthly energy bill is invalid or zero.");
                 return 'N/A'; // Or a default message
             }
 
@@ -233,17 +231,17 @@
             const annualBill = monthlyEnergyBill * 12;
             const hvacPortion = annualBill * 0.40; // 40% of bill is HVAC
             const potentialSavings = hvacPortion * 0.30; // 30% savings on HVAC portion
-            
+
             const waste = `$${potentialSavings.toFixed(2)}`;
-            console.log("Calculated Projected Annual Waste:", waste); // Diagnostic 4
+            console.log("Calculated Projected Annual Waste:", waste);
             return waste;
         }
 
         // Quiz submission
         const quizForm = document.getElementById('silentLossQuiz');
-        if (quizForm) { // Ensure the form exists before adding listener
+        if (quizForm) {
             quizForm.addEventListener('submit', function(e) {
-                console.log("Quiz form submit event triggered."); // Diagnostic 5
+                console.log("Quiz form submit event triggered.");
                 e.preventDefault(); // Crucial: Prevent default form submission
 
                 // Calculate and display results
@@ -259,9 +257,9 @@
                 sessionStorage.setItem('projected_annual_waste', calculatedWaste);
 
                 // Hide the quiz form and show the result section
-                this.classList.add('hidden'); // 'this' refers to the form
+                this.classList.add('hidden');
                 document.getElementById('quizResult').classList.remove('hidden');
-                console.log("Quiz results displayed. Form hidden."); // Diagnostic 6
+                console.log("Quiz results displayed. Form hidden.");
 
                 // Push GTM event for quiz submission
                 dataLayer.push({
@@ -272,18 +270,23 @@
                     risk_level: calculatedRisk,
                     projected_waste: calculatedWaste
                 });
-                console.log("GTM quiz_submit event pushed."); // Diagnostic 7
+                console.log("GTM quiz_submit event pushed.");
+
+                // *** NEW: Redirect to proof.html immediately after showing results ***
+                const storedRisk = sessionStorage.getItem('quiz_risk');
+                const storedWaste = sessionStorage.getItem('projected_annual_waste');
+                console.log("Redirecting to proof.html with risk and waste parameters.");
+                window.location.href = `/proof.html?risk=${storedRisk}&waste=${storedWaste}`;
             });
         } else {
             console.error("Error: Quiz form with ID 'silentLossQuiz' not found.");
         }
 
 
-        // Email gate submission (TEMPORARILY COMMENTED OUT FOR DIAGNOSTICS)
-        /*
+        // Email gate submission (now only sends email, then redirects to proof.html)
         document.getElementById('emailGateForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            console.log("Email gate form submit event triggered."); // Diagnostic
+            console.log("Email gate form submit event triggered.");
             
             const email = document.getElementById('quizEmail').value;
             const formAction = this.action;
@@ -308,27 +311,27 @@
             })
             .then(response => {
                 if (response.ok) {
+                    console.log("Email submitted successfully via Getform. Redirecting to proof.html.");
                     window.location.href = `/proof.html?risk=${storedRisk}&waste=${storedWaste}`;
                 } else {
                     const messageBox = document.getElementById('emailMessage');
                     messageBox.textContent = 'There was an error submitting your email. Please try again.';
                     messageBox.classList.remove('hidden');
+                    console.error("Getform submission failed:", response.status, response.statusText);
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
+                console.error('Network error during email submission:', error);
                 const messageBox = document.getElementById('emailMessage');
                 messageBox.textContent = 'Network error. Please try again.';
                 messageBox.classList.remove('hidden');
             });
         });
-        */
 
-        // Proof CTA click (TEMPORARILY COMMENTED OUT FOR DIAGNOSTICS)
-        /*
+        // Proof CTA click (now directly redirects)
         document.getElementById('quizCta').addEventListener('click', function(e) {
             e.preventDefault();
-            console.log("Proof CTA click event triggered."); // Diagnostic
+            console.log("Proof CTA click event triggered. Redirecting to proof.html.");
             
             const storedRisk = sessionStorage.getItem('quiz_risk');
             const storedWaste = sessionStorage.getItem('projected_annual_waste');
@@ -344,7 +347,6 @@
             
             window.location.href = `/proof.html?risk=${storedRisk}&waste=${storedWaste}`;
         });
-        */
     });
     </script>
 </body>
