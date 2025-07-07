@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Initialize dataLayer for Google Tag Manager events ---
     // This ensures dataLayer is defined before any push operations,
     // even if GTM's main script hasn't fully loaded/processed yet.
+    // This line is crucial for ensuring window.dataLayer is an array.
     window.dataLayer = window.dataLayer || [];
 
     // --- Initial setup and URL parameter parsing ---
@@ -97,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Push GTM event for ROI CTA click
-            dataLayer.push({
+            window.dataLayer.push({ // Changed to window.dataLayer.push
                 event: 'cta_click',
                 category: 'ROI Calculator',
                 action: 'Estimate ROI Click',
@@ -122,23 +123,23 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = "Sending...";
 
             const formAction = this.action;
-            const email = document.getElementById('quizEmail') ? document.getElementById('quizEmail').value : ''; // Get email if quiz email field exists
+            const formData = new FormData(this); // Create FormData object from the form
+            const email = formData.get('email'); // Correctly get email from FormData
             const estimatedSavings = document.getElementById('hiddenEstimatedSavings').value;
             const paybackPeriod = document.getElementById('hiddenPaybackPeriod').value;
 
             // Push GTM event for ROI email submission
-            dataLayer.push({
+            window.dataLayer.push({ // Changed to window.dataLayer.push
                 event: 'email_submit',
                 category: 'ROI Calculator',
                 action: 'ROI Report Request',
-                label: email,
+                label: email, // Now correctly captures the email from the form
                 estimated_savings: estimatedSavings,
                 payback_period: paybackPeriod
             });
 
             try {
-                const formData = new FormData(this);
-                // Add any other relevant data to formData if not already in hidden fields
+                // The formData object is already created above
                 formData.append('source_page', 'proof.html');
                 formData.append('form_type', 'roi_report_request');
 
