@@ -341,6 +341,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="/scripts/ui-behaviors.js"></script>
     <script src="/scripts/dashboard-demo.js"></script>
     <script src="/scripts/roi-calc.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // ROI Calculator
+    const roiBtn = document.getElementById('calculateRoiBtn');
+    if (roiBtn) {
+      roiBtn.addEventListener('click', function () {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'cta_click',
+          category: 'Calculator',
+          action: 'Calculate ROI',
+          label: 'Savings Estimate'
+        });
+      });
+    }
+
+    // Apply for Pilot
+    const applyBtn = document.getElementById('applyPilotBtn');
+    if (applyBtn) {
+      applyBtn.addEventListener('click', function () {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'cta_click',
+          category: 'Pilot',
+          action: 'Apply',
+          label: 'Apply for Pilot'
+        });
+      });
+    }
+
+    // See if You Qualify
+    const qualifyBtn = document.getElementById('qualifyBtn');
+    if (qualifyBtn) {
+      qualifyBtn.addEventListener('click', function () {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'cta_click',
+          category: 'Pilot',
+          action: 'Qualify',
+          label: 'See If You Qualify'
+        });
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
