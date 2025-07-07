@@ -44,9 +44,9 @@
                 <form id="silentLossQuiz" class="text-left">
                     <div class="quiz-question">
                         <label class="block text-xl font-bold mb-3 text-primary">
-                          1. What type of space best describes your building?
+                            1. What type of space best describes your building?
                         </label>
-                        <select id="spaceType" name="spaceType" class="quiz-input text-lg">
+                        <select id="spaceType" name="spaceType" class="quiz-input text-lg rounded-md p-2 border border-gray-300 w-full focus:ring-2 focus:ring-accent focus:border-transparent">
                             <option value="">Select an option</option>
                             <option value="office">Office Building</option>
                             <option value="school">School/University</option>
@@ -57,68 +57,68 @@
                         </select>
                     </div>
 
-                    <div class="quiz-question">
+                    <div class="quiz-question mt-8">
                         <label class="block text-xl font-bold mb-3 text-primary">
-                          2. Do occupants regularly adjust thermostats or complain about comfort?
+                            2. Do occupants regularly adjust thermostats or complain about comfort?
                         </label>
-                        <div class="mt-2">
-                            <label class="quiz-option">
-                                <input type="radio" name="thermostatAdjust" value="yes"> Yes, frequently
+                        <div class="mt-2 space-y-2">
+                            <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
+                                <input type="radio" name="thermostatAdjust" value="yes" class="mr-2"> Yes, frequently
                             </label>
-                            <label class="quiz-option">
-                                <input type="radio" name="thermostatAdjust" value="sometimes"> Sometimes
+                            <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
+                                <input type="radio" name="thermostatAdjust" value="sometimes" class="mr-2"> Sometimes
                             </label>
-                            <label class="quiz-option">
-                                <input type="radio" name="thermostatAdjust" value="no"> No, rarely or never
+                            <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
+                                <input type="radio" name="thermostatAdjust" value="no" class="mr-2"> No, rarely or never
                             </label>
                         </div>
                     </div>
 
-                    <div class="quiz-question">
+                    <div class="quiz-question mt-8">
                         <label class="block text-xl font-bold mb-3 text-primary">
-                          3. How often are rooms or zones in your building empty but still receiving heating or cooling?
+                            3. How often are rooms or zones in your building empty but still receiving heating or cooling?
                         </label>
-                        <div class="mt-2">
-                            <label class="quiz-option">
-                                <input type="radio" name="emptyRooms" value="frequently"> Frequently (multiple hours/day)
+                        <div class="mt-2 space-y-2">
+                            <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
+                                <input type="radio" name="emptyRooms" value="frequently" class="mr-2"> Frequently (multiple hours/day)
                             </label>
-                            <label class="quiz-option">
-                                <input type="radio" name="emptyRooms" value="sometimes"> Sometimes (a few hours/day)
+                            <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
+                                <input type="radio" name="emptyRooms" value="sometimes" class="mr-2"> Sometimes (a few hours/day)
                             </label>
-                            <label class="quiz-option">
-                                <input type="radio" name="emptyRooms" value="rarely"> Rarely or never
+                            <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
+                                <input type="radio" name="emptyRooms" value="rarely" class="mr-2"> Rarely or never
                             </label>
                         </div>
                     </div>
 
-                    <div class="quiz-question">
+                    <div class="quiz-question mt-8">
                         <label class="block text-xl font-bold mb-3 text-primary">
-                          4. Was your primary HVAC system installed or significantly overhauled in the last 7 years?
+                            4. Was your primary HVAC system installed or significantly overhauled in the last 7 years?
                         </label>
-                        <div class="mt-2">
-                            <label class="quiz-option">
-                                <input type="radio" name="hvacAge" value="yes"> Yes
+                        <div class="mt-2 space-y-2">
+                            <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
+                                <input type="radio" name="hvacAge" value="yes" class="mr-2"> Yes
                             </label>
-                            <label class="quiz-option">
-                                <input type="radio" name="hvacAge" value="no"> No, it's older
+                            <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
+                                <input type="radio" name="hvacAge" value="no" class="mr-2"> No, it's older
                             </label>
-                            <label class="quiz-option">
-                                <input type="radio" name="hvacAge" value="unsure"> Unsure
+                            <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
+                                <input type="radio" name="hvacAge" value="unsure" class="mr-2"> Unsure
                             </label>
                         </div>
                     </div>
 
-                    <div class="quiz-question">
+                    <div class="quiz-question mt-8">
                         <label class="block text-xl font-bold mb-3 text-primary">
-                          5. What is your estimated average monthly energy bill for the entire building?
+                            5. What is your estimated average monthly energy bill for the entire building?
                         </label>
                         <input type="number" id="monthlyEnergyBill" name="monthlyEnergyBill"
-                               class="quiz-input text-lg"
+                               class="quiz-input text-lg rounded-md p-2 border border-gray-300 w-full focus:ring-2 focus:ring-accent focus:border-transparent"
                                placeholder="$ Amount (e.g., 2500)" min="0">
                     </div>
 
                     <button type="submit"
-                            class="w-full bg-accent text-primary font-bold py-4 px-8 rounded-full text-xl hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
+                            class="w-full bg-accent text-primary font-bold py-4 px-8 rounded-full text-xl hover:bg-yellow-400 transition-colors duration-300 shadow-lg mt-10">
                         Reveal My Risk
                     </button>
                 </form>
@@ -133,22 +133,22 @@
                     
                     <!-- Email Gate -->
                     <form id="emailGateForm" action="https://getform.io/f/byvyddxa" method="POST"
-                          class="mt-8 text-center">
+                                class="mt-8 text-center">
                         <p class="text-lg font-semibold mb-4">
                             Want your full savings report + install guide?
                         </p>
                         <input type="email" id="quizEmail" name="email"
-                               class="quiz-input max-w-md mx-auto mb-4 block text-lg"
+                               class="quiz-input max-w-md mx-auto mb-4 block text-lg rounded-md p-2 border border-gray-300 focus:ring-2 focus:ring-accent focus:border-transparent"
                                placeholder="you@yourcompany.com" required />
                         <input type="hidden" name="_gotcha" style="display:none !important">
                         <button type="submit" id="unlockProofBtn"
-                                class="bg-accent text-primary font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
+                                 class="bg-accent text-primary font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-400 transition-colors duration-300 shadow-lg">
                             Send My ROI + Unlock Next Step
                         </button>
                         <div id="emailMessage" class="message-box hidden mt-4 text-red-600"></div>
                     </form>
 
-                    <a id="quizCta" href="#" class="hidden mt-6 inline-block bg-secondary text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-blue-600 transition-colors duration-300 shadow-lg">
+                    <a id="quizCta" href="#" class="mt-6 inline-block bg-secondary text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-blue-600 transition-colors duration-300 shadow-lg">
                         See Proof + Calculate Your Payback
                     </a>
                 </div>
@@ -166,40 +166,176 @@
     document.addEventListener('DOMContentLoaded', function () {
         window.dataLayer = window.dataLayer || [];
 
+        // Helper function to get radio button value
+        function getRadioValue(name) {
+            const radios = document.getElementsByName(name);
+            for (let i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    return radios[i].value;
+                }
+            }
+            return null;
+        }
+
+        // Function to calculate risk level based on quiz answers
+        function calculateRiskLevel() {
+            let score = 0;
+            const spaceType = document.getElementById('spaceType').value;
+            const thermostatAdjust = getRadioValue('thermostatAdjust');
+            const emptyRooms = getRadioValue('emptyRooms');
+            const hvacAge = getRadioValue('hvacAge');
+            const monthlyEnergyBill = parseFloat(document.getElementById('monthlyEnergyBill').value) || 0;
+
+            // Assign points based on answers to determine risk
+            if (thermostatAdjust === 'yes') {
+                score += 3;
+            } else if (thermostatAdjust === 'sometimes') {
+                score += 1;
+            }
+
+            if (emptyRooms === 'frequently') {
+                score += 3;
+            } else if (emptyRooms === 'sometimes') {
+                score += 1;
+            }
+
+            if (hvacAge === 'no') { // Older HVAC increases risk
+                score += 2;
+            } else if (hvacAge === 'unsure') {
+                score += 1;
+            }
+
+            // Consider high energy bill as a factor for higher risk
+            if (monthlyEnergyBill > 5000) { // Example threshold
+                score += 2;
+            } else if (monthlyEnergyBill > 1000) {
+                score += 1;
+            }
+
+            // Adjust for space type if needed, e.g.,
+            // if (spaceType === 'office' || spaceType === 'retail') score += 1;
+
+            if (score >= 6) {
+                return 'HIGH';
+            } else if (score >= 3) {
+                return 'MEDIUM';
+            } else {
+                return 'LOW';
+            }
+        }
+
+        // Function to calculate projected annual waste
+        function calculateProjectedAnnualWaste() {
+            const monthlyEnergyBill = parseFloat(document.getElementById('monthlyEnergyBill').value);
+            if (isNaN(monthlyEnergyBill) || monthlyEnergyBill <= 0) {
+                return 'N/A'; // Or a default message
+            }
+
+            // Assuming HVAC is 40% of the total energy bill and SentientZone saves 30% of HVAC costs
+            const annualBill = monthlyEnergyBill * 12;
+            const hvacPortion = annualBill * 0.40; // 40% of bill is HVAC
+            const potentialSavings = hvacPortion * 0.30; // 30% savings on HVAC portion
+
+            return `$${potentialSavings.toFixed(2)}`;
+        }
+
         // Quiz submission
         document.getElementById('silentLossQuiz').addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // Calculate and display results
+            const calculatedRisk = calculateRiskLevel();
+            const calculatedWaste = calculateProjectedAnnualWaste();
+
+            document.getElementById('riskLevel').textContent = calculatedRisk;
+            document.getElementById('projectedWaste').textContent = calculatedWaste;
+
+            // Store results in session storage for use on other pages (e.g., proof.html)
+            // Note: 'projected_annual_waste' is used for the calculated waste value
+            sessionStorage.setItem('quiz_risk', calculatedRisk);
+            sessionStorage.setItem('quiz_bill', document.getElementById('monthlyEnergyBill').value); // Store the raw bill
+            sessionStorage.setItem('projected_annual_waste', calculatedWaste); // Store the calculated waste
+
+            // Hide the quiz form and show the result section
+            this.classList.add('hidden'); // 'this' refers to the form
+            document.getElementById('quizResult').classList.remove('hidden');
+
+            // Push GTM event for quiz submission
             dataLayer.push({
                 event: 'quiz_submit',
                 category: 'Quiz',
                 action: 'Reveal Risk',
-                label: document.getElementById('spaceType').value || 'unknown'
+                label: document.getElementById('spaceType').value || 'unknown',
+                risk_level: calculatedRisk,
+                projected_waste: calculatedWaste
             });
-            // ...existing quiz logic here...
-            // After logic, show result:
-            document.getElementById('quizResult').classList.remove('hidden');
         });
 
         // Email gate submission
         document.getElementById('emailGateForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            const email = document.getElementById('quizEmail').value;
+            const formAction = this.action; // Getform URL
+            const storedRisk = sessionStorage.getItem('quiz_risk');
+            const storedWaste = sessionStorage.getItem('projected_annual_waste');
+
+            // Push GTM event for email gate submission
             dataLayer.push({
                 event: 'email_submit',
                 category: 'Quiz',
-                action: 'Email Gate',
-                label: document.getElementById('riskLevel').textContent || 'unknown'
+                action: 'Email Gate Submitted',
+                label: email,
+                risk_level: storedRisk,
+                projected_waste: storedWaste
             });
-            // ...existing email submission logic...
+
+            // Manually send form data to Getform
+            fetch(formAction, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(new FormData(this)).toString(),
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Success: Redirect to proof page with results
+                    window.location.href = `/proof.html?risk=${storedRisk}&waste=${storedWaste}`;
+                } else {
+                    // Handle error
+                    const messageBox = document.getElementById('emailMessage');
+                    messageBox.textContent = 'There was an error submitting your email. Please try again.';
+                    messageBox.classList.remove('hidden');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const messageBox = document.getElementById('emailMessage');
+                messageBox.textContent = 'Network error. Please try again.';
+                messageBox.classList.remove('hidden');
+            });
         });
 
         // Proof CTA click
-        document.getElementById('quizCta').addEventListener('click', function() {
+        document.getElementById('quizCta').addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default link behavior for now, as we'll redirect manually
+            
+            const storedRisk = sessionStorage.getItem('quiz_risk');
+            const storedWaste = sessionStorage.getItem('projected_annual_waste');
+
+            // Push GTM event for CTA click
             dataLayer.push({
                 event: 'cta_click',
                 category: 'Quiz',
                 action: 'View Proof',
-                label: 'See Proof + Calculate Your Payback'
+                label: 'See Proof + Calculate Your Payback',
+                risk_level: storedRisk,
+                projected_waste: storedWaste
             });
+            
+            // Redirect to proof page
+            window.location.href = `/proof.html?risk=${storedRisk}&waste=${storedWaste}`;
         });
     });
     </script>
