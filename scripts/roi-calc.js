@@ -4,6 +4,11 @@
 // pilot modal logic (now for ROI email gate), session storage fallbacks, and exit-intent trigger.
 
 document.addEventListener('DOMContentLoaded', function() {
+    // --- Initialize dataLayer for Google Tag Manager events ---
+    // This ensures dataLayer is defined before any push operations,
+    // even if GTM's main script hasn't fully loaded/processed yet.
+    window.dataLayer = window.dataLayer || [];
+
     // --- Initial setup and URL parameter parsing ---
     const urlParams = new URLSearchParams(window.location.search);
     const riskLevelFromQuiz = urlParams.get('risk');
