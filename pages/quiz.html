@@ -46,7 +46,7 @@
                         <label class="block text-xl font-bold mb-3 text-primary">
                             1. What type of space best describes your building?
                         </label>
-                        <select id="spaceType" name="spaceType" class="quiz-input text-lg rounded-md p-2 border border-gray-300 w-full focus:ring-2 focus:ring-accent focus:border-transparent">
+                        <select id="spaceType" name="spaceType" class="quiz-input text-lg rounded-md p-2 border border-gray-300 w-full focus:ring-2 focus:ring-accent focus:border-transparent" required>
                             <option value="">Select an option</option>
                             <option value="office">Office Building</option>
                             <option value="school">School/University</option>
@@ -63,7 +63,7 @@
                         </label>
                         <div class="mt-2 space-y-2">
                             <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
-                                <input type="radio" name="thermostatAdjust" value="yes" class="mr-2"> Yes, frequently
+                                <input type="radio" name="thermostatAdjust" value="yes" class="mr-2" required> Yes, frequently
                             </label>
                             <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
                                 <input type="radio" name="thermostatAdjust" value="sometimes" class="mr-2"> Sometimes
@@ -80,7 +80,7 @@
                         </label>
                         <div class="mt-2 space-y-2">
                             <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
-                                <input type="radio" name="emptyRooms" value="frequently" class="mr-2"> Frequently (multiple hours/day)
+                                <input type="radio" name="emptyRooms" value="frequently" class="mr-2" required> Frequently (multiple hours/day)
                             </label>
                             <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
                                 <input type="radio" name="emptyRooms" value="sometimes" class="mr-2"> Sometimes (a few hours/day)
@@ -97,7 +97,7 @@
                         </label>
                         <div class="mt-2 space-y-2">
                             <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
-                                <input type="radio" name="hvacAge" value="yes" class="mr-2"> Yes
+                                <input type="radio" name="hvacAge" value="yes" class="mr-2" required> Yes
                             </label>
                             <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
                                 <input type="radio" name="hvacAge" value="no" class="mr-2"> No, it's older
@@ -114,7 +114,7 @@
                         </label>
                         <input type="number" id="monthlyEnergyBill" name="monthlyEnergyBill"
                                class="quiz-input text-lg rounded-md p-2 border border-gray-300 w-full focus:ring-2 focus:ring-accent focus:border-transparent"
-                               placeholder="$ Amount (e.g., 2500)" min="0">
+                               placeholder="$ Amount (e.g., 2500)" min="0" required>
                     </div>
 
                     <button type="submit"
@@ -133,7 +133,7 @@
                     
                     <!-- Email Gate -->
                     <form id="emailGateForm" action="https://getform.io/f/byvyddxa" method="POST"
-                                class="mt-8 text-center">
+                                 class="mt-8 text-center">
                         <p class="text-lg font-semibold mb-4">
                             Want your full savings report + install guide?
                         </p>
@@ -164,6 +164,7 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {
+        console.log("DOMContentLoaded fired. Quiz script loaded."); // Diagnostic 1
         window.dataLayer = window.dataLayer || [];
 
         // Helper function to get radio button value
@@ -215,19 +216,16 @@
             // Adjust for space type if needed, e.g.,
             // if (spaceType === 'office' || spaceType === 'retail') score += 1;
 
-            if (score >= 6) {
-                return 'HIGH';
-            } else if (score >= 3) {
-                return 'MEDIUM';
-            } else {
-                return 'LOW';
-            }
+            const risk = (score >= 6) ? 'HIGH' : (score >= 3) ? 'MEDIUM' : 'LOW';
+            console.log("Calculated Risk Level:", risk, "Score:", score); // Diagnostic 2
+            return risk;
         }
 
         // Function to calculate projected annual waste
         function calculateProjectedAnnualWaste() {
             const monthlyEnergyBill = parseFloat(document.getElementById('monthlyEnergyBill').value);
             if (isNaN(monthlyEnergyBill) || monthlyEnergyBill <= 0) {
+                console.log("Monthly energy bill is invalid or zero."); // Diagnostic 3
                 return 'N/A'; // Or a default message
             }
 
@@ -235,52 +233,63 @@
             const annualBill = monthlyEnergyBill * 12;
             const hvacPortion = annualBill * 0.40; // 40% of bill is HVAC
             const potentialSavings = hvacPortion * 0.30; // 30% savings on HVAC portion
-
-            return `$${potentialSavings.toFixed(2)}`;
+            
+            const waste = `$${potentialSavings.toFixed(2)}`;
+            console.log("Calculated Projected Annual Waste:", waste); // Diagnostic 4
+            return waste;
         }
 
         // Quiz submission
-        document.getElementById('silentLossQuiz').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Calculate and display results
-            const calculatedRisk = calculateRiskLevel();
-            const calculatedWaste = calculateProjectedAnnualWaste();
+        const quizForm = document.getElementById('silentLossQuiz');
+        if (quizForm) { // Ensure the form exists before adding listener
+            quizForm.addEventListener('submit', function(e) {
+                console.log("Quiz form submit event triggered."); // Diagnostic 5
+                e.preventDefault(); // Crucial: Prevent default form submission
 
-            document.getElementById('riskLevel').textContent = calculatedRisk;
-            document.getElementById('projectedWaste').textContent = calculatedWaste;
+                // Calculate and display results
+                const calculatedRisk = calculateRiskLevel();
+                const calculatedWaste = calculateProjectedAnnualWaste();
 
-            // Store results in session storage for use on other pages (e.g., proof.html)
-            // Note: 'projected_annual_waste' is used for the calculated waste value
-            sessionStorage.setItem('quiz_risk', calculatedRisk);
-            sessionStorage.setItem('quiz_bill', document.getElementById('monthlyEnergyBill').value); // Store the raw bill
-            sessionStorage.setItem('projected_annual_waste', calculatedWaste); // Store the calculated waste
+                document.getElementById('riskLevel').textContent = calculatedRisk;
+                document.getElementById('projectedWaste').textContent = calculatedWaste;
 
-            // Hide the quiz form and show the result section
-            this.classList.add('hidden'); // 'this' refers to the form
-            document.getElementById('quizResult').classList.remove('hidden');
+                // Store results in session storage for use on other pages (e.g., proof.html)
+                sessionStorage.setItem('quiz_risk', calculatedRisk);
+                sessionStorage.setItem('quiz_bill', document.getElementById('monthlyEnergyBill').value);
+                sessionStorage.setItem('projected_annual_waste', calculatedWaste);
 
-            // Push GTM event for quiz submission
-            dataLayer.push({
-                event: 'quiz_submit',
-                category: 'Quiz',
-                action: 'Reveal Risk',
-                label: document.getElementById('spaceType').value || 'unknown',
-                risk_level: calculatedRisk,
-                projected_waste: calculatedWaste
+                // Hide the quiz form and show the result section
+                this.classList.add('hidden'); // 'this' refers to the form
+                document.getElementById('quizResult').classList.remove('hidden');
+                console.log("Quiz results displayed. Form hidden."); // Diagnostic 6
+
+                // Push GTM event for quiz submission
+                dataLayer.push({
+                    event: 'quiz_submit',
+                    category: 'Quiz',
+                    action: 'Reveal Risk',
+                    label: document.getElementById('spaceType').value || 'unknown',
+                    risk_level: calculatedRisk,
+                    projected_waste: calculatedWaste
+                });
+                console.log("GTM quiz_submit event pushed."); // Diagnostic 7
             });
-        });
+        } else {
+            console.error("Error: Quiz form with ID 'silentLossQuiz' not found.");
+        }
 
-        // Email gate submission
+
+        // Email gate submission (TEMPORARILY COMMENTED OUT FOR DIAGNOSTICS)
+        /*
         document.getElementById('emailGateForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            console.log("Email gate form submit event triggered."); // Diagnostic
             
             const email = document.getElementById('quizEmail').value;
-            const formAction = this.action; // Getform URL
+            const formAction = this.action;
             const storedRisk = sessionStorage.getItem('quiz_risk');
             const storedWaste = sessionStorage.getItem('projected_annual_waste');
 
-            // Push GTM event for email gate submission
             dataLayer.push({
                 event: 'email_submit',
                 category: 'Quiz',
@@ -290,7 +299,6 @@
                 projected_waste: storedWaste
             });
 
-            // Manually send form data to Getform
             fetch(formAction, {
                 method: 'POST',
                 headers: {
@@ -300,10 +308,8 @@
             })
             .then(response => {
                 if (response.ok) {
-                    // Success: Redirect to proof page with results
                     window.location.href = `/proof.html?risk=${storedRisk}&waste=${storedWaste}`;
                 } else {
-                    // Handle error
                     const messageBox = document.getElementById('emailMessage');
                     messageBox.textContent = 'There was an error submitting your email. Please try again.';
                     messageBox.classList.remove('hidden');
@@ -316,15 +322,17 @@
                 messageBox.classList.remove('hidden');
             });
         });
+        */
 
-        // Proof CTA click
+        // Proof CTA click (TEMPORARILY COMMENTED OUT FOR DIAGNOSTICS)
+        /*
         document.getElementById('quizCta').addEventListener('click', function(e) {
-            e.preventDefault(); // Prevent default link behavior for now, as we'll redirect manually
+            e.preventDefault();
+            console.log("Proof CTA click event triggered."); // Diagnostic
             
             const storedRisk = sessionStorage.getItem('quiz_risk');
             const storedWaste = sessionStorage.getItem('projected_annual_waste');
 
-            // Push GTM event for CTA click
             dataLayer.push({
                 event: 'cta_click',
                 category: 'Quiz',
@@ -334,9 +342,9 @@
                 projected_waste: storedWaste
             });
             
-            // Redirect to proof page
             window.location.href = `/proof.html?risk=${storedRisk}&waste=${storedWaste}`;
         });
+        */
     });
     </script>
 </body>
