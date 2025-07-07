@@ -86,7 +86,7 @@
                                 <input type="radio" name="emptyRooms" value="sometimes" class="mr-2"> Sometimes (a few hours/day)
                             </label>
                             <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
-                                <input type="radio" name="emptyRooms" value="rarely" class="mr-2"> Rarely or never
+                                <input type="radio" name="emptyRooms" value="rarely" class="mr-2" required> Rarely or never
                             </label>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                                 <input type="radio" name="hvacAge" value="no" class="mr-2"> No, it's older
                             </label>
                             <label class="quiz-option block p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100 transition-colors duration-200">
-                                <input type="radio" name="hvacAge" value="unsure" class="mr-2"> Unsure
+                                <input type="radio" name="hvacAge" value="unsure" class="mr-2" required> Unsure
                             </label>
                         </div>
                     </div>
@@ -272,11 +272,11 @@
                 });
                 console.log("GTM quiz_submit event pushed.");
 
-                // *** NEW: Redirect to proof.html immediately after showing results ***
+                // *** REDIRECT TO /proof (without .html) ***
                 const storedRisk = sessionStorage.getItem('quiz_risk');
                 const storedWaste = sessionStorage.getItem('projected_annual_waste');
-                console.log("Redirecting to proof.html with risk and waste parameters.");
-                window.location.href = `/proof.html?risk=${storedRisk}&waste=${storedWaste}`;
+                console.log("Redirecting to /proof with risk and waste parameters.");
+                window.location.href = `/proof?risk=${storedRisk}&waste=${storedWaste}`;
             });
         } else {
             console.error("Error: Quiz form with ID 'silentLossQuiz' not found.");
@@ -311,8 +311,8 @@
             })
             .then(response => {
                 if (response.ok) {
-                    console.log("Email submitted successfully via Getform. Redirecting to proof.html.");
-                    window.location.href = `/proof.html?risk=${storedRisk}&waste=${storedWaste}`;
+                    console.log("Email submitted successfully via Getform. Redirecting to /proof.");
+                    window.location.href = `/proof?risk=${storedRisk}&waste=${storedWaste}`;
                 } else {
                     const messageBox = document.getElementById('emailMessage');
                     messageBox.textContent = 'There was an error submitting your email. Please try again.';
@@ -331,7 +331,7 @@
         // Proof CTA click (now directly redirects)
         document.getElementById('quizCta').addEventListener('click', function(e) {
             e.preventDefault();
-            console.log("Proof CTA click event triggered. Redirecting to proof.html.");
+            console.log("Proof CTA click event triggered. Redirecting to /proof.");
             
             const storedRisk = sessionStorage.getItem('quiz_risk');
             const storedWaste = sessionStorage.getItem('projected_annual_waste');
@@ -345,7 +345,7 @@
                 projected_waste: storedWaste
             });
             
-            window.location.href = `/proof.html?risk=${storedRisk}&waste=${storedWaste}`;
+            window.location.href = `/proof?risk=${storedRisk}&waste=${storedWaste}`;
         });
     });
     </script>
