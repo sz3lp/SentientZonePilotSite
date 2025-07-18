@@ -63,27 +63,27 @@
     <script>
         // Supabase configuration - REPLACE WITH YOUR ACTUAL SUPABASE DETAILS
         // You can find these in your Supabase project settings under API.
-        const SUPABASE_URL = 'https://lojafhskcvmugyxwybeb.supabase.co'; // Corrected Supabase URL
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxvamFmaHNrY3ZtdWd5eHd5YmViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIxNjE1MzIsImV4cCI6MjA2NzczNzUzMn0.2qKuM-WvKZcEgjJqLGvMyjBw0dpp1o0ELCkEuDKRUpw'; // Corrected Supabase anon key
+        const SUPABASE_URL = 'https://lojafhskcvmugyxwebeb.supabase.co'; // Corrected Supabase URL
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxojafhskcvmugyxwebebIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIxNjE1MzIsImV4cCI6MjA2NzczNzUzMn0.2qKuM-WvKZcEgjJqLGvMyjBw0dpp1o0ELCkEuDKRUpw'; // Corrected Supabase anon key
 
         // Questions data
         const questions = [
-            { id: 1, theme: "Philosophy", text: "What does 'emotional literacy' *look like* in a 3-year-old? Give me an example.", microPrompt: "Think about the tiny humans and their big feelings!" },
-            { id: 2, theme: "Philosophy", text: "What should a preschooler *never* be punished for?", microPrompt: "What's off-limits for consequences?" },
-            { id: 3, theme: "Philosophy", text: "What’s something you *refuse* to do in your classroom, even if every other teacher does it?", microPrompt: "Your secret rebellion!" },
-            { id: 4, theme: "Philosophy", text: "You can only teach one thing all year. What is it?", microPrompt: "The ultimate lesson." },
-            { id: 5, theme: "Ritual & Rhythm", text: "Describe the first 10 minutes after drop-off. Don’t hold back.", microPrompt: "The sacred opening act." },
-            { id: 6, theme: "Ritual & Rhythm", text: "What’s the weekly ritual the kids look forward to most?", microPrompt: "The highlight of their week!" },
-            { id: 7, theme: "Ritual & Rhythm", text: "What’s one daily sensory experience you would build the whole day around?", microPrompt: "Engage all the senses!" },
-            { id: 8, theme: "Relational Structure", text: "How do you want parents to *feel* when they leave their kid with you?", microPrompt: "The parent vibe check." },
-            { id: 9, theme: "Relational Structure", text: "When a child is melting down, what do you do? What do you *not* do?", microPrompt: "The meltdown masterpiece." },
-            { id: 10, theme: "Relational Structure", text: "If a parent disagrees with your method, how do you respond?", microPrompt: "Navigating the parent-teacher dance." },
-            { id: 11, theme: "Environment Design", text: "What does a 'sacred' learning space smell like? Sound like?", microPrompt: "Paint a picture with your senses." },
-            { id: 12, theme: "Environment Design", text: "What’s the most important object in the room—and why?", microPrompt: "The unsung hero of the classroom." },
-            { id: 13, theme: "Environment Design", text: "If you had to eliminate all furniture but one piece, what stays?", microPrompt: "Survival of the essential!" },
-            { id: 14, theme: "Staffing + Culture", text: "What would disqualify someone from ever working here, no matter their credentials?", microPrompt: "The absolute no-go." },
-            { id: 15, theme: "Staffing + Culture", text: "What’s the initiation ritual every new staff member must go through?", microPrompt: "Welcome to the family!" },
-            { id: 16, theme: "Staffing + Culture", text: "What’s more important: warmth or structure? Why?", microPrompt: "The great debate!" }
+            { id: 1, theme: "Philosophy", text: "What does 'emotional literacy' truly look like in a 3-year-old's daily interactions?", microPrompt: "Consider concrete examples of how it manifests." },
+            { id: 2, theme: "Philosophy", text: "What fundamental aspect of a preschooler's behavior or development should never be met with punishment?", microPrompt: "What natural expressions are always protected?" },
+            { id: 3, theme: "Philosophy", text: "What is one common practice in early childhood education that you fundamentally disagree with and would never implement in your classroom?", microPrompt: "Your pedagogical non-negotiable." },
+            { id: 4, theme: "Philosophy", text: "If you could impart only one core lesson to children throughout the entire school year, what would it be?", microPrompt: "The singular, most vital teaching." },
+            { id: 5, theme: "Ritual & Rhythm", text: "Describe the essential elements of the first 10 minutes after children arrive for the day. What is the intended atmosphere and flow?", microPrompt: "Set the tone for the sacred space." },
+            { id: 6, theme: "Ritual & Rhythm", text: "What is a weekly ritual or activity that consistently brings joy and deep engagement to the children?", microPrompt: "The highlight of their week's rhythm." },
+            { id: 7, theme: "Ritual & Rhythm", text: "If you were to design the day around a single, central sensory experience, what would it be and why?", microPrompt: "How would you immerse them?" },
+            { id: 8, theme: "Relational Structure", text: "What is the primary feeling or state of mind you want parents to experience when they entrust their child to your care?", microPrompt: "The desired emotional resonance for families." },
+            { id: 9, theme: "Relational Structure", text: "When a child is experiencing a significant emotional challenge (e.g., a meltdown), what is your immediate and deliberate approach, and what actions do you consciously avoid?", microPrompt: "Navigating intense emotions with intention." },
+            { id: 10, theme: "Relational Structure", text: "How do you approach a situation where a parent expresses a fundamental disagreement with your educational philosophy or methods?", microPrompt: "Bridging philosophical differences with families." },
+            { id: 11, theme: "Environment Design", text: "Beyond visual aesthetics, what sensory qualities (smell, sound, texture) define a 'sacred' learning space for you?", microPrompt: "Describe the immersive sensory experience." },
+            { id: 12, theme: "Environment Design", text: "If you could choose only one object to remain in the classroom, what would it be and what profound purpose does it serve?", microPrompt: "The single most impactful element." },
+            { id: 13, theme: "Environment Design", text: "Imagine you must remove all but one piece of furniture from the classroom. Which piece remains, and how does it support your core philosophy?", microPrompt: "The essential anchor of the space." },
+            { id: 14, theme: "Staffing + Culture", text: "What single quality or characteristic, regardless of a candidate's credentials, would immediately disqualify them from joining your team?", microPrompt: "The absolute deal-breaker." },
+            { id: 15, theme: "Staffing + Culture", text: "Describe an essential initiation or deep immersion process every new staff member must undergo to truly understand and embody your program's culture.", microPrompt: "Welcoming them into the 'soul' of the program." },
+            { id: 16, theme: "Staffing + Culture", text: "In your philosophy, what holds greater importance: providing warmth and nurturing connection, or establishing clear structure and boundaries? Please explain why.", microPrompt: "The balance of heart and framework." }
         ];
 
         let currentQuestionIndex = 0;
