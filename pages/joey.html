@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOEY Menu Master</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f3f0;
+        }
+        .flashcard-container {
+            perspective: 1000px;
+        }
+        .flashcard {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+        .flashcard-front,
+        .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1.5rem; /* Rounded corners */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .flashcard-front {
+            background-color: #fff;
+        }
+        .flashcard-back {
+            background-color: #5d5c61;
+            color: #fff;
+            transform: rotateY(180deg);
+        }
+        .btn {
+            @apply bg-orange-600 text-white font-semibold py-2 px-4 rounded-xl shadow-lg hover:bg-orange-700 transition duration-300 transform hover:scale-105;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
+
+    <!-- Main Container -->
+    <div class="max-w-xl w-full mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-4">JOEY Menu Master</h1>
+        <p class="text-center text-gray-600 mb-8">Click the card to flip and learn key selling points!</p>
+
+        <!-- Flashcard Container -->
+        <div class="flashcard-container" onclick="flipCard()">
+            <div id="flashcard" class="flashcard">
+                <!-- Front of the card -->
+                <div class="flashcard-front">
+                    <h2 id="item-title" class="text-3xl font-bold text-gray-900"></h2>
+                    <p id="item-price" class="text-xl text-gray-500 mt-2"></p>
+                </div>
+                <!-- Back of the card -->
+                <div class="flashcard-back">
+                    <h3 class="text-xl font-bold mb-2">Key Selling Points</h3>
+                    <div id="item-details" class="text-sm space-y-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex flex-col sm:flex-row justify-center items-center mt-8 space-y-4 sm:space-y-0 sm:space-x-4">
+            <button id="prev-btn" class="btn">Previous</button>
+            <button id="next-btn" class="btn">Next</button>
+            <button id="shuffle-btn" class="btn">Shuffle</button>
+        </div>
+
+    </div>
+
+    <script>
+        const cards = [
+    {
+        item: "Spicy Crab Dip",
+        price: "$23",
+        description: "A creamy dip with lump crab, green onion, and pickled fresnos, served warm with grilled sourdough.",
+        upsell: "Highlight the freshness of the crab and the savory, spicy flavor. Suggest it as a decadent share plate.",
+        pairings: "Pairs well with a crisp white wine like the Yealands Sauvignon Blanc or a light beer like Bud Light. Also goes great with a Classic Margarita or a refreshing Strawberry Cool (Zero-Proof)."
+    },
+    {
+        item: "Scallop & Shrimp Ceviche",
+        price: "$25",
+        description: "Fresh scallops and shrimp in a vibrant lemongrass-pineapple dressing with avocado and cilantro.",
+        upsell: "Sell as a light, refreshing starter. Mention its bright and tropical flavors.",
+        pairings: "Perfect with a light, effervescent cocktail like the Aperol Spritz or a glass of Prosecco. For a zero-proof option, suggest the Frozen Lemonade."
+    },
+    {
+        item: "Miso Roasted Mushrooms",
+        price: "$14",
+        description: "Button mushrooms and shallots roasted with white wine, offering a rich, savory, and umami flavor.",
+        upsell: "Suggest as a great side for any steak or main dish to add a deep, earthy flavor.",
+        pairings: "Pairs well with a red blend like the Tamarack 'firehouse' Red Blend. Also a great companion for a Classic Negroni or a hearty beer like the Mac + Jack's African Amber."
+    },
+    {
+        item: "Mini Steak French Dips",
+        price: "$14 / $26",
+        description: "Carved New York strip and Gruyere cheese on garlic toast, served with rich au jus.",
+        upsell: "Suggest the 'full order of four' for just $26, highlighting the value for the group.",
+        pairings: "Pair with a full-bodied red wine like a Cabernet Sauvignon or a dark beer like Guinness. The Super Stoked Jack & Coke is also a great fit."
+    },
+    {
+        item: "Japanese Gyoza",
+        price: "$16.50",
+        description: "Pork dumplings with a savory filling, served with hot mustard for a classic taste.",
+        upsell: "Sell as a classic appetizer that’s great for sharing. Mention the savory flavor.",
+        pairings: "Pairs well with a light lager like Bud Light or a Japanese-inspired cocktail. A Supernova Vodka Soda works great with the hot mustard."
+    },
+    {
+        item: "Hibachi Wings",
+        price: "$23",
+        description: "Spice-rubbed wings served with a savory parmesan dip.",
+        upsell: "Position these as a great option for a group. Suggest ordering a second appetizer to share.",
+        pairings: "Pair with a cold draft beer like the Georgetown 'Bodhizafa' American Ipa or a crisp lager. The Spicy Passionfruit Margarita also provides a great contrast to the spice."
+    },
+    {
+        item: "Korean Fried Cauliflower",
+        price: "$17",
+        description: "Crispy cauliflower tossed in a sweet and spicy Korean chili miso paste with toasted sesame seeds.",
+        upsell: "Describe its sweet-spicy kick. Market as a delicious and unique share plate for the table.",
+        pairings: "Pairs well with a Pineapple Wheat beer or a crisp, cooling cocktail like the Watermelon Drink. The Matcha Mojito (Zero-Proof) is also a fantastic pairing."
+    },
+    {
+        item: "Truffle Parmesan Fries",
+        price: "$13.75",
+        description: "Crispy fries tossed in truffle oil and parmesan, served with a grainy mustard aioli.",
+        upsell: "This is a great add-on for any burger or steak. 'Our Truffle Parmesan Fries are the perfect decadent side for your meal.'",
+        pairings: "Perfect with any burger, steak, or cocktail. A classic choice with a Stella Artois or a Sauvignon Blanc."
+    },
+    {
+        item: "Szechuan Chicken Lettuce Wraps",
+        price: "$24.50",
+        description: "Crispy chicken with a sweet soy ginger glaze, peanuts, and wontons. A perfect blend of sweet and savory.",
+        upsell: "Offer to substitute shrimp for an extra $3, framing it as a premium choice.",
+        pairings: "Suggest a refreshing cocktail like the Watermelon Drink ($17) or a crisp lager. The Coconut Smash also complements the sweet glaze."
+    },
+    {
+        item: "Chargrilled 10 Oz Pork Chop",
+        price: "$43",
+        description: "A tender, juicy pork chop with peanut salsa macha and Mexican street corn gnocchi.",
+        upsell: "Highlight the unique and bold flavor combinations. Sell as a must-try chef's special.",
+        pairings: "Pairs well with a Malbec from Doña Paula or an Old Fashioned. The Seattle Cider Co. Semi Sweet is another excellent choice."
+    },
+    {
+        item: "Chicken Parmesan",
+        price: "$35",
+        description: "A classic dish with a breaded chicken breast baked with mozzarella and served over spaghetti pomodoro.",
+        upsell: "Suggest adding a side of garlic toast for just $5.25.",
+        pairings: "A classic Chianti Classico from Isole E Olena or a full-bodied red. For a beer pairing, the Mac + Jack's African Amber is a great match."
+    },
+    {
+        item: "Spaghetti Pomodoro",
+        price: "$24",
+        description: "Calabrian chili-spiked tomato sauce with whipped ricotta and basil, perfect for sharing.",
+        upsell: "Suggest adding a side of garlic toast for $5.25.",
+        pairings: "Pairs well with a light-bodied red wine like the Medici Ermete Lambrusco or a refreshing Aperol Spritz. The Rejuvenation (Low-Alcohol Cocktail) is a great, light option."
+    },
+    {
+        item: "Herb Crush Salmon",
+        price: "$41",
+        description: "Herb-crusted salmon with a truffle beurre blanc, preserved tomatoes, and creamy mashed potatoes.",
+        upsell: "Mention the delicate flavor of the salmon and the rich, luxurious sauce.",
+        pairings: "Pairs beautifully with a crisp Sauvignon Blanc like the Patient Cottat Sancerre or a Chardonnay. A good choice with the Kiwi Melon Collins (Low-Alcohol Cocktail)."
+    },
+    {
+        item: "Lobster Spaghetti",
+        price: "$39",
+        description: "Atlantic lobster and prawns tossed in a white wine, shallot, and lobster-lemon butter sauce.",
+        upsell: "Sell this as a premium seafood experience. Highlight the rich lobster flavor.",
+        pairings: "Pairs well with a crisp white wine like the Laroche Chablis or a refreshing Sauvignon Blanc. The JOEY 75 Champagne cocktail is a fantastic pairing."
+    },
+    {
+        item: "Farmers Market Salad",
+        price: "$19",
+        description: "A fresh and vibrant salad with strawberries, beets, roasted corn, and candied sunflower seeds.",
+        upsell: "Suggest adding grilled chicken for $8 or salmon for $12 to turn it into a full entree.",
+        pairings: "Pairs well with a light, crisp wine like the Les Quatre Tour Rosé. The Strawberry Cool (Zero-Proof) also complements the fruit."
+    },
+    {
+        item: "Yellowfin Tuna Salad",
+        price: "$29.25",
+        description: "Seared rare tuna with avocado, peanuts, and gyoza strips in a cilantro ginger dressing.",
+        upsell: "Highlight the quality of the sashimi-grade tuna and the unique crunch of the gyoza.",
+        pairings: "Pairs well with a bright white wine like the Kung Fu Girl Riesling or a Classic Margarita. A Supernova Vodka Soda also works well."
+    },
+    {
+        item: "Tuna Poke Bowl",
+        price: "$29",
+        description: "Sashimi-grade ahi tuna poke with crispy wontons and a spicy chili crisp, served over jasmine rice.",
+        upsell: "Suggest adding avocado for an extra $4.",
+        pairings: "Pairs well with a Supernova Vodka Soda or a light beer. The Piña Roja (Low-Alcohol Cocktail) is a good match for the chili crisp."
+    },
+    {
+        item: "Sushi Cone",
+        price: "$7.50 ea",
+        description: "Tempura shrimp, avocado, and spicy mayo wrapped in a crispy cone.",
+        upsell: "Suggest it as a fun, hand-held appetizer. 'Perfect for a quick bite before your main course.'",
+        pairings: "Pairs well with a crisp beer or a light, refreshing cocktail like the Watermelon Drink."
+    },
+    {
+        item: "Seared Salmon Sushi",
+        price: "$22.50",
+        description: "Osaka-pressed, fire-torched salmon with a savory umami sauce and shaved serrano peppers.",
+        upsell: "Describe the dish as a unique and delicious take on sushi. Highlight the torched flavor and umami sauce.",
+        pairings: "Pairs well with a classic Pinot Noir or a light, crisp white wine. The Supersonic Gin & Tonic is a fresh pairing."
+    },
+    {
+        item: "Baja Fish Tacos",
+        price: "$22.50",
+        description: "Two shrimp and cod tacos with guacamole and Valentina's hot sauce.",
+        upsell: "Mention the fresh, vibrant flavors and the perfect combination of seafood and guacamole.",
+        pairings: "Pairs well with a Classic Margarita or a refreshing light lager. The Mezcal Drink is an excellent choice to complement the smoky flavors."
+    },
+    {
+        item: "Ahi Tuna Club",
+        price: "$27",
+        description: "Grilled rare tuna with bacon, sweet pepper relish, and onion rings, creating a truly unique sandwich.",
+        upsell: "Sell it as the perfect combination of land and sea. Highlight the rare tuna and the contrast of bacon and onion rings.",
+        pairings: "Pairs well with a refreshing Supernova Vodka Soda or a crisp Sauvignon Blanc. Also great with a Corona or Heineken."
+    },
+    {
+        item: "JOEY Cheeseburger",
+        price: "$25",
+        description: "Two juicy patties with aged cheddar cheese, pickles, lettuce, and our roasted onion aioli.",
+        upsell: "Suggest adding caramelized onions and melted gouda for a small upcharge.",
+        pairings: "Pair with a cold draft beer like the Stella Artois ($11.50) or the Mac + Jack's African Amber ($9.50). The Super Stoked Jack & Coke is a fantastic pairing."
+    },
+    {
+        item: "Bone-in Prime Ribeye",
+        price: "$105",
+        description: "A colossal 22-ounce cut, perfectly marbled and served with our famous crispy mashed potatoes.",
+        upsell: "Suggest for high-end tables or as a 'showstopper' for sharing. Highlight its size and premium quality.",
+        pairings: "Pair with a bottle of a bold Cabernet Sauvignon like the Caymus ($198) or the Freemark Abbey ($129). For a cocktail, suggest the Woodsmoked Old Fashioned. It's the ultimate power pairing.",
+        pronunciation: "Caymus: 'KAY-mus' | Freemark Abbey: 'FREE-mark AB-ee'"
+    },
+    {
+        item: "Steak With Lobster",
+        price: "$72",
+        description: "A succulent Prime Sirloin paired with a tender, flavorful lobster tail. The perfect surf and turf combination.",
+        upsell: "Sell it as the 'ultimate luxury' for couples. Highlight the truffle beurre blanc sauce.",
+        pairings: "Suggest a lighter-bodied red like a Pinot Noir from King Estate ($72) or a Chardonnay like the Hartford Court ($105). The JOEY 75 Champagne cocktail is also an excellent choice.",
+        pronunciation: "Pinot Noir: 'PEE-no nwahr'"
+    },
+    {
+        item: "Steak Frites",
+        price: "$31.75",
+        description: "A 5-ounce steak with garlic butter, rocket greens, and fries.",
+        upsell: "Offer steak upgrades, sauces, or add-ons like Miso Roasted Mushrooms ($7) or Garlic Lemon Shrimp ($13.25).",
+        pairings: "Pairs well with a simple red wine like the Drumheller Cab Sauv ($60) or a Classic Negroni ($21). The Georgetown 'Manny's' Pale Ale is also a great choice.",
+        pronunciation: "Negroni: 'neh-GROW-nee'"
+    },
+    {
+        item: "Molten Chocolate Cake",
+        price: "$15",
+        description: "A rich, individually baked cake with a gooey center, served with fresh raspberries and Tahitian vanilla ice cream.",
+        upsell: "Describe it vividly and suggest a pairing. Sell it as the perfect ending to the meal.",
+        pairings: "Pair with a coffee, an Espresso Martini ($18), or a Woodsmoked Old Fashioned ($23) for a decadent experience."
+    },
+    {
+        item: "Crème Brûlée Cheesecake",
+        price: "$8 / $14.50",
+        description: "A cheesecake with a classic caramelized sugar topping, fresh strawberry compote, and whipped cream.",
+        upsell: "Suggest a half portion for a 'small bite' or a full portion for a 'full dessert experience.'",
+        pairings: "Pairs well with a fruity cocktail or a dessert wine if available. The JOEY 75 Champagne cocktail is a delicious pairing for this dessert.",
+        pronunciation: "Crème Brûlée: 'krem broo-LAY'"
+    },
+    {
+        item: "Old Fashioned",
+        price: "$21",
+        description: "A classic cocktail made with Maker's Mark Bourbon, cane syrup, and bitters.",
+        upsell: "Suggest upgrading to Woodford Reserve for $3 or Michter's US*1 for $4.",
+        pairings: "Pairs well with any of the steaks or the Molten Chocolate Cake."
+    },
+    {
+        item: "Classic Margarita",
+        price: "$17",
+        description: "A perfect blend of tequila, triple sec, lime, and cane syrup.",
+        upsell: "Suggest upgrading the tequila to El Tesoro for $6 or Clase Azul Plata for $13.",
+        pairings: "Pairs well with the Baja Fish Tacos or the Spicy Crab Dip. The Hibachi Wings are also a great pairing."
+    },
+    {
+        item: "Woodsmoked Old Fashioned",
+        price: "$23",
+        description: "A classic Old Fashioned made with Woodford Reserve, smoked tableside with applewood for a theatrical presentation.",
+        upsell: "Position this as a premium, high-status drink. Highlight the 'tableside' element and the luxurious 'applewood-smoked' flavor.",
+        pairings: "It pairs best with a rich steak or the Molten Chocolate Cake."
+    },
+    {
+        item: "Gruet Sparkling Rosé",
+        price: "bottle $52",
+        description: "A bright and crisp sparkling rosé from New Mexico.",
+        upsell: "Suggest for celebratory occasions or as a refreshing start to the meal. Highlight its crisp, clean taste.",
+        pairings: "Pairs perfectly with light appetizers like the Scallop & Shrimp Ceviche or sushi.",
+        pronunciation: "Gruet: 'GROO-ay'"
+    },
+    {
+        item: "Veuve Clicquot",
+        price: "bottle $159",
+        description: "A renowned champagne known for its elegance and complexity, with notes of brioche and fruit.",
+        upsell: "The ultimate celebration bottle. Frame it as the perfect choice for a special occasion.",
+        pairings: "Excellent with seafood dishes, especially the Lobster Spaghetti, or as a stand-alone celebratory drink.",
+        pronunciation: "Veuve Clicquot: 'vuhv klee-KOH'"
+    },
+    {
+        item: "Patient Cottat Sancerre",
+        price: "bottle $74",
+        description: "A classic Sauvignon Blanc from the Loire Valley, known for its minerality and notes of gooseberry and citrus.",
+        upsell: "For a guest who loves Sauvignon Blanc, present this as a higher-end, European alternative.",
+        pairings: "A perfect match for the Herb Crush Salmon or the Scallop & Shrimp Ceviche.",
+        pronunciation: "Sancerre: 'sahn-SEHR'"
+    },
+    {
+        item: "Laroche Chablis",
+        price: "8oz $20 / bottle $95",
+        description: "An unoaked Chardonnay from France with a crisp, dry profile and notes of green apple and flint.",
+        upsell: "Suggest to guests who want a richer white wine but are wary of an oaky flavor. Highlight its unique minerality.",
+        pairings: "Pairs exceptionally well with seafood and rich pasta dishes like the Lobster Spaghetti.",
+        pronunciation: "Chablis: 'shah-BLEE'"
+    },
+    {
+        item: "Vietti 'perbacco' Nebbiolo",
+        price: "bottle $66",
+        description: "A complex red wine with notes of cherry, plum, and spice, with firm tannins.",
+        upsell: "A great option for a guest who wants to try something new. It's a fantastic food wine.",
+        pairings: "Excellent with red meats. A perfect match for the Chargrilled 10 Oz Pork Chop or the Chicken Parmesan.",
+        pronunciation: "Vietti Nebbiolo: 'vee-ET-tee neh-BEE-oh-low'"
+    },
+    {
+        item: "Isole E Olena Chianti Classico",
+        price: "bottle $75",
+        description: "A beautiful, classic Chianti with notes of tart red cherry, leather, and spice.",
+        upsell: "Frame this as an iconic Italian red that is perfect for any pasta or pizza.",
+        pairings: "The ideal pairing for any of the pasta dishes or the Chicken Parmesan.",
+        pronunciation: "Chianti Classico: 'kee-AHN-tee KLASS-ih-koh'"
+    },
+    {
+        item: "Antinori 'tignanello' Super Tuscan",
+        price: "bottle $298",
+        description: "A prestigious, high-end Super Tuscan with a blend of Sangiovese and Cabernet Sauvignon. A rich and complex wine.",
+        upsell: "The ultimate power move. This is the top of the line. Sell this as the most memorable wine experience on the menu.",
+        pairings: "A flawless pairing for the Bone-in Prime Ribeye or the Prime New York Strip. This is a pairing for the highest-spending guests.",
+        pronunciation: "Antinori Tignanello: 'ahn-tih-NOR-ee tin-yah-NEH-low'"
+    }
+];
+
+        let currentCardIndex = 0;
+        const flashcardElement = document.getElementById('flashcard');
+        const itemTitle = document.getElementById('item-title');
+        const itemPrice = document.getElementById('item-price');
+        const itemDetails = document.getElementById('item-details');
+
+        function renderCard() {
+            const card = cards[currentCardIndex];
+            itemTitle.textContent = card.item;
+            itemPrice.textContent = card.price;
+            itemDetails.innerHTML = `
+                <p><strong>Description:</strong> ${card.description}</p>
+                <p><strong>Upsell Pitch:</strong> ${card.upsell}</p>
+                <p><strong>Pairings:</strong> ${card.pairings}</p>
+                ${card.pronunciation ? `<p><strong>Pronunciation:</strong> ${card.pronunciation}</p>` : ''}
+            `;
+            flashcardElement.classList.remove('flipped');
+        }
+
+        function flipCard() {
+            flashcardElement.classList.toggle('flipped');
+        }
+
+        function nextCard() {
+            currentCardIndex = (currentCardIndex + 1) % cards.length;
+            renderCard();
+        }
+
+        function prevCard() {
+            currentCardIndex = (currentCardIndex - 1 + cards.length) % cards.length;
+            renderCard();
+        }
+
+        function shuffleCards() {
+            for (let i = cards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [cards[i], cards[j]] = [cards[j], cards[i]];
+            }
+            currentCardIndex = 0;
+            renderCard();
+        }
+
+        document.getElementById('next-btn').addEventListener('click', nextCard);
+        document.getElementById('prev-btn').addEventListener('click', prevCard);
+        document.getElementById('shuffle-btn').addEventListener('click', shuffleCards);
+
+        // Initial render
+        shuffleCards();
+    </script>
+
+</body>
+</html>
